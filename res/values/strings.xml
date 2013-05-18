@@ -3,6 +3,9 @@
 
     <string name="app_name">Collabsoup</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
-
+    <string name="ui_login_email">Email:</string>
+    <string name="ui_login_password">Password:</string>
+    <string name="ui_login_signin">Sign in</string>
+	<string name="ui_login_signup">Don\'t have an account?</string>
+	
 </resources>
