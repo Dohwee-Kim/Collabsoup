@@ -19,7 +19,7 @@ public class LoginActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		System.out.println();
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.log_in);
 		// hi i am here 
 	}
 
