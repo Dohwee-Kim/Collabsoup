@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id = "@+id/ui_sign_up_first_name"
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:text = "@string/ui_sign_up_first_name" />
+    
+    <EditText
+        android:id = "@+id/ui_sign_up_edit_first_name"
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:editable = "false"/>
+    
+    <TextView
+        android:id = "@+id/ui_sign_up_last_name"
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:text = "@string/ui_sign_up_last_name" />
+    
+    <EditText
+        android:id = "@+id/ui_sign_up_edit_last_name"
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:editable = "false" />
+    
+    <TextView
+        android:id = "@+id/ui_sign_up_email"
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:text = "@string/ui_sign_up_email" />
+    
+    <EditText
+        android:id = "@+id/ui_sign_up_edit_email"
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:editable = "false" />
+    
+    <TextView
+        android:id = "@+id/ui_sign_up_confirm_email"
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:text = "@string/ui_sign_up_confirm_email" />
+    
+    <EditText
+        android:id = "@+id/ui_sign_up_edit_confirm_email"
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:editable = "false" />
+    
+    <TextView
+        android:id = "@+id/ui_sign_up_password"
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:text = "@string/ui_sign_up_password" />
+    
+    <EditText
+        android:id = "@+id/ui_sign_up_edit_password"
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:editable = "false" />
+    
+    <TextView
+        android:id = "@+id/ui_sign_up_confirm_password"
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:text = "@string/ui_sign_up_confirm_password" />
+    
+    <EditText
+        android:id = "@+id/ui_sign_up_edit_confirm_password"
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:editable = "false" />
+    
+    
+	<Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+		android:layout_gravity="center_horizontal"
+        android:onClick="onSigninClicked"
+        android:text="@string/ui_sign_up_button" />
+
+</LinearLayout>

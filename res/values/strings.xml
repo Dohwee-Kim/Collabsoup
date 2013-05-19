@@ -3,9 +3,51 @@
 
     <string name="app_name">Collabsoup</string>
     <string name="action_settings">Settings</string>
+    
+    
+	<!-- Login Layout -->
     <string name="ui_login_email">Email:</string>
     <string name="ui_login_password">Password:</string>
-    <string name="ui_login_signin">Sign in</string>
+    <string name="ui_login_signin_button">Sign in</string>
 	<string name="ui_login_signup">Don\'t have an account?</string>
+	<!-- Login Layout -->
+	
+	
+	<!-- Sign Up Layout -->
+	<string name="ui_sign_up_first_name">First Name:</string>
+	<string name="ui_sign_up_last_name">Last Name:</string>
+	<string name="ui_sign_up_email">Email:</string>
+	<string name="ui_sign_up_confirm_email">Confirm Email:</string>
+	<string name="ui_sign_up_password">Password:</string>
+    <string name="ui_sign_up_confirm_password">Confirm Password:</string>
+    <string name="ui_sign_up_button">Sign Up</string>
+	<!-- Sign Up Layout -->
+	
+	
+	<!-- Add Courses -->
+	<string name="ui_add_course_department_view">Department:</string>
+	<string-array name="ui_add_course_department_spinner">
+        <item>African and African American Studies</item>
+        <item>Asian and Middle Eastern Languages and Literatures</item>
+        <item>Asian and Middle Eastern Studies</item>
+        <item>Anthropology</item>
+        <item>Arabic</item>
+        <item>Art History</item>
+        <item>Astronomy</item>
+        <item>Biological Sciences</item>
+        <item>Chemistry</item>
+        <item>Chinese</item>
+        <item>Classical Studies</item>
+        <item>College Courses</item>
+        <item>Comparative Literature</item>
+        <item>Computer Science</item>
+        <item>Earth Sciences</item>
+        <item>Economics</item>
+        <item>English</item>
+        <item>Engineering Sciences</item>
+    </string-array>
+	<string name="ui_add_course_course_number">Course Number:</string>
+	<string name="ui_add_course_button">Add Course</string>
+	<!-- Add Courses -->
 	
 </resources>
