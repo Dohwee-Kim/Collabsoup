@@ -55,5 +55,16 @@
 	<string name="ui_add_course_course_number">Course Number:</string>
 	<string name="ui_add_course_button">Add Course</string>
 	<!-- Add Courses -->
+	<string name="ui_profile_tab_start_title">Profile</string>
+	<string name="ui_course_tab_start_title">Courses</string>
+	<string name="ui_profile_photo_title">Profile Photo:</string>
+	<string name="ui_profile_photo_content_description">Your Profile Photo</string>
+	<string name="ui_button_change_title">Change</string>
+	<string name="ui_profile_name_title">User name</string>
+	<string name="ui_profile_name_hint">Your name here</string>
+	<string name="ui_profile_email_title">Email:</string>
+	<string name="ui_profile_email_hint">Your e-mail here</string>
+	<string name="ui_switch_title">Broadcast my location</string>
+	<string name="ui_course_tab_title">Courses</string>
 	
 </resources>

@@ -35,7 +35,7 @@ public class LoginActivity extends Activity {
 	
 	public void onSigninClicked(View v){
 		Toast.makeText(getApplicationContext(),
-				"Testing..",
+				"intent from Login to main screen..",
 				Toast.LENGTH_SHORT).show();
 		
 		// Later , need to implement putExtra for additional log in info  
