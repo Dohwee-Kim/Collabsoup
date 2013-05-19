@@ -24,6 +24,12 @@
 	<!-- Sign Up Layout -->
 	
 	
+	<!-- Courses Layout -->
+	<string name="ui_courses_add_button">Add Courses</string>
+	<string name="ui_courses_show_button">Show nearby students</string>
+	<!-- Courses Layout -->
+	
+	
 	<!-- Add Courses -->
 	<string name="ui_add_course_department_view">Department:</string>
 	<string-array name="ui_add_course_department_spinner">
