@@ -31,6 +31,10 @@
             </intent-filter>
         </activity>
         
+        <activity 
+            android:name="edu.dartmouth.cscollabsoup.SignUpActivity">
+        </activity>
+        
     </application>
 
 </manifest>

@@ -27,13 +27,13 @@ public class MainActivity extends Activity {
 		mainActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS); 
 		// IF WE want to change to different style, we should modify this part 
 		
-		Tab mProfileTab = mainActionBar.newTab().setText(getString(R.string.ui_profile_tab_start_title)).setTabListener(
-				new TabListener <ProfileTabFragment>(this, getString(R.string.ui_profile_tab_start_title), ProfileTabFragment.class) );
-		mainActionBar.addTab(mProfileTab);
-		
-		Tab mCourseTab = mainActionBar.newTab().setText(getString(R.string.ui_course_tab_title)).setTabListener(
-				new TabListener <CourseTabFragment>(this, getString(R.string.ui_course_tab_title), CourseTabFragment.class) );
-		mainActionBar.addTab(mCourseTab);
+//		Tab mProfileTab = mainActionBar.newTab().setText(getString(R.string.ui_profile_tab_start_title)).setTabListener(
+//				new TabListener <ProfileTabFragment>(this, getString(R.string.ui_profile_tab_start_title), ProfileTabFragment.class) );
+//		mainActionBar.addTab(mProfileTab);
+//		
+//		Tab mCourseTab = mainActionBar.newTab().setText(getString(R.string.ui_course_tab_title)).setTabListener(
+//				new TabListener <CourseTabFragment>(this, getString(R.string.ui_course_tab_title), CourseTabFragment.class) );
+//		mainActionBar.addTab(mCourseTab);
 		
 		//Restore Navigation part 
 		if (savedInstanceState != null) {

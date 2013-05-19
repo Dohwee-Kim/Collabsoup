@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
+    
+    <LinearLayout
+        android:layout_width = "match_parent"
+        android:layout_height = "fill_parent"
+        android:orientation = "vertical">
 
     <TextView
         android:id = "@+id/ui_sign_up_first_name"
@@ -83,7 +88,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
 		android:layout_gravity="center_horizontal"
-        android:onClick="onSigninClicked"
+        android:onClick="onSignUpClicked"
         android:text="@string/ui_sign_up_button" />
+	
+	</LinearLayout>
 
-</LinearLayout>
+</ScrollView>
