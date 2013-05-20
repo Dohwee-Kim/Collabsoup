@@ -13,7 +13,7 @@
         android:id="@+id/editText4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/ui_login_password"/>
+        android:text="@string/ui_login_email"/>
     
     <EditText
         android:id="@+id/editText1"
@@ -26,7 +26,7 @@
         android:id="@+id/editText3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/ui_login_email"/>
+        android:text="@string/ui_login_password"/>
 
     <EditText
         android:id="@+id/editText2"
@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onSigninClicked"
-            android:text="@string/ui_sign_up_button" />
+            android:text="@string/ui_login_signin_button" />
 
         <TextView
             android:id="@+id/NoAccountTextView"

@@ -9,10 +9,13 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
+import android.content.Intent;
 
 
 public class MainActivity extends Activity {
@@ -27,19 +30,33 @@ public class MainActivity extends Activity {
 		mainActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS); 
 		// IF WE want to change to different style, we should modify this part 
 		
-//		Tab mProfileTab = mainActionBar.newTab().setText(getString(R.string.ui_profile_tab_start_title)).setTabListener(
-//				new TabListener <ProfileTabFragment>(this, getString(R.string.ui_profile_tab_start_title), ProfileTabFragment.class) );
-//		mainActionBar.addTab(mProfileTab);
-//		
-//		Tab mCourseTab = mainActionBar.newTab().setText(getString(R.string.ui_course_tab_title)).setTabListener(
-//				new TabListener <CourseTabFragment>(this, getString(R.string.ui_course_tab_title), CourseTabFragment.class) );
-//		mainActionBar.addTab(mCourseTab);
+		Tab mProfileTab = mainActionBar.newTab().setText(getString(R.string.ui_profile_tab_start_title)).setTabListener(
+				new TabListener <ProfileTabFragment>(this, getString(R.string.ui_profile_tab_start_title), ProfileTabFragment.class) );
+		mainActionBar.addTab(mProfileTab);
+		
+		Tab mCourseTab = mainActionBar.newTab().setText(getString(R.string.ui_course_tab_title)).setTabListener(
+				new TabListener <CourseTabFragment>(this, getString(R.string.ui_course_tab_title), CourseTabFragment.class) );
+		mainActionBar.addTab(mCourseTab);
 		
 		//Restore Navigation part 
 		if (savedInstanceState != null) {
 			mainActionBar.setSelectedNavigationItem(savedInstanceState.getInt(
 			TAB_INDEX_KEY, 0));
 		}
+		
+
+//		View.OnClickListener addCourseListener = new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				Intent intent = new Intent (MainActivity.this, AddCourses.class);
+//				startActivity(intent);
+//				
+//			}
+//		};
+//		Button addCoursesButton = (Button) findViewById(R.id.btnStart);
+//		addCoursesButton.setOnClickListener(addCourseListener);
+//		
 	}
 	
 	@Override
@@ -72,7 +89,7 @@ public class MainActivity extends Activity {
 		}
 		/* The following are each of the ActionBar.TabListener callbacks */
 		public void onTabSelected(Tab tab, FragmentTransaction ft) {
-			//mFragment = (Fragment) Fragment.instantiate(mActivity, fname)
+			//mFragment = (Fragment) Fragment.instantiate(mActivity, frame)
 			if (mFragment == null){
 				mFragment = Fragment.instantiate(mActivity, mClass.getName(), null);
 				ft.add(android.R.id.content, mFragment, mTag);
@@ -94,11 +111,9 @@ public class MainActivity extends Activity {
 			}
 	}
 	
-//	
-//	@Override
-//	public View onCreateView(LayoutInflater inflater, ViewGroup container, 
-//			Bundle savedInstanceState){
-//		// inflate layout here and return the View !!
-//		return inflater.inflate(R.layout.activity_profile, container, false);
-//	}
+	public void onAddCoursesClicked (View v) {
+	    	Toast.makeText(getApplicationContext(), "CourseFragment to add courses.", Toast.LENGTH_SHORT).show();
+	    	Intent intent = new Intent (MainActivity.this, AddCourses.class);
+	    	startActivity (intent);
+	}
 }
