@@ -116,4 +116,6 @@ public class MainActivity extends Activity {
 	    	Intent intent = new Intent (MainActivity.this, AddCourses.class);
 	    	startActivity (intent);
 	}
+	
+	
 }

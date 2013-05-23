@@ -32,6 +32,7 @@
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:onClick="onSyncClicked"
         android:text="@string/ui_courses_show_button" />
     
     </LinearLayout>

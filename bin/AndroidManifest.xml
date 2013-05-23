@@ -35,6 +35,14 @@
             android:name="edu.dartmouth.cscollabsoup.SignUpActivity">
         </activity>
         
+        <activity
+            android:name="edu.dartmouth.cscollabsoup.ParseDataHelper">
+            <intent-filter>
+                <action android:name="android.intent.action.ParseDataHelper" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
     </application>
 
 </manifest>
