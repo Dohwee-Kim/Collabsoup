@@ -64,16 +64,32 @@ public class ParseDataHelper extends Activity {
 			Bundle data = intent.getExtras();
 			mLocation = data.getString("key_bio_location", "");
 			String[] locationLines = mLocation.split(";");
-			String locationStat = "";
+			int[] distanceArray = new int[locationLines.length];
+			
+			int x=0;
+			String[] locationStat = new String[locationLines.length];
+			
+			
+			
 			for (String line : locationLines) {
+				
 				String[] wifiComponents = line.split(",");
-				locationStat = locationStat
-						+ parseTime(Double.valueOf(wifiComponents[0]).longValue())+","
-						+ wifiComponents[1] +","+wifiComponents[2] + "\n";
+				
+				locationStat[x] = wifiComponents[1] +", "+wifiComponents[2] + "\n";
+				Log.e("ParseDataHelper", "GOT HERE" + wifiComponents[2]);
+				distanceArray[x] = Integer.parseInt(wifiComponents[2]);
+				
+				x++;
 			}
-			mLocation = locationStat;
+			
+			for (int i =0; i<distanceArray.length; i++)
+				System.out.println(distanceArray[i]);
+			int m = maxPos(distanceArray);
+			System.out.println(m);
+			mLocation = locationStat[m];
 			locationInfo.setText(mLocation);
-			Log.e("ParseDataHelper", "location" + mLocation);
+			
+//			Log.e("ParseDataHelper", "location" + mLocation);
 		}
 	};
 
@@ -88,10 +104,7 @@ public class ParseDataHelper extends Activity {
 			activityInfo.setText(mActivity);
 			colocationInfo.setText(mColocation);
 			locationInfo.setText(mLocation);
-			conversationInfo.setText("from "
-					+ parseTime(Double.valueOf(conversationComponents[0])
-							.longValue() / 1000)
-					+ "to "
+			conversationInfo.setText("last conversation at: "
 					+ parseTime(Double.valueOf(conversationComponents[1])
 							.longValue() / 1000));
 			Log.e("MainActivity", "conversation" + mConversation);
@@ -105,6 +118,17 @@ public class ParseDataHelper extends Activity {
 		SimpleDateFormat dateFormat;
 		dateFormat = new SimpleDateFormat(DATE_FORMAT);
 		return dateFormat.format(calendar.getTime());
+	}
+
+	//finds the POSITION of max value in int array
+	private static int maxPos(int[] chars) {
+		int max = 0;
+		for (int ktr = 0; ktr < chars.length; ktr++) {
+			if (chars[ktr] > max) {
+				max = ktr;
+			}
+		}
+		return max;
 	}
 	
 	@Override
