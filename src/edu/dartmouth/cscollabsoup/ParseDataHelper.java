@@ -76,7 +76,28 @@ public class ParseDataHelper extends Activity {
 			Log.e("ParseDataHelper", "location" + mLocation);
 		}
 	};
+
 	
+	private BroadcastReceiver conversationReceiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			Bundle data = intent.getExtras();
+			mConversation = data.getString("key_bio_conversation", "");
+			String[] conversationComponents = mConversation.split(",");
+
+			activityInfo.setText(mActivity);
+			colocationInfo.setText(mColocation);
+			locationInfo.setText(mLocation);
+			conversationInfo.setText("from "
+					+ parseTime(Double.valueOf(conversationComponents[0])
+							.longValue() / 1000)
+					+ "to "
+					+ parseTime(Double.valueOf(conversationComponents[1])
+							.longValue() / 1000));
+			Log.e("MainActivity", "conversation" + mConversation);
+		}
+	};
+
 	//Private function for parsingTime 
 	private String parseTime(long timeInSec) {
 		GregorianCalendar calendar = new GregorianCalendar();
@@ -101,5 +122,6 @@ public class ParseDataHelper extends Activity {
 		// registerReceiver(colocationReceiver, new IntentFilter("bio_colocation"));
 		registerReceiver(locationReceiver, new IntentFilter("bio_location"));
 		
+		registerReceiver(conversationReceiver, new IntentFilter("bio_conversation"));
 	}
 }
