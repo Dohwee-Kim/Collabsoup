@@ -58,10 +58,11 @@
 	<string name="ui_profile_tab_start_title">Profile</string>
 	<string name="ui_profile_broadcast_location">Broadcast My Location</string>
 	<string name="ui_course_tab_start_title">Courses</string>
-	<string name="ui_profile_photo_title">Profile Photo:</string>
-	<string name="ui_profile_photo_content_description">Your Profile Photo</string>
 	<string name="ui_button_change_title">Change</string>
-	<string name="ui_profile_name_title">User name</string>
+	
+	<string name="ui_profile_first_name">First Name:</string>
+	<string name="ui_profile_last_name">Last Name:</string>
+	<string name="ui_profile_name_title">User name:</string>
 	<string name="ui_profile_name_hint">Your name here</string>
 	<string name="ui_profile_email_title">Email:</string>
 	<string name="ui_profile_email_hint">Your e-mail here</string>

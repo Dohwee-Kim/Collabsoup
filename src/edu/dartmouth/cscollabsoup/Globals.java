@@ -19,6 +19,8 @@ public abstract class Globals
 	public static final String PROFILE_KEY_PASSWORD = "password";
 	public static String USERNAME = "";
 	public static  String PASSWORD = "";
+	public static String FIRSTNAME = "";
+	public static String LASTNAME = "";
 	public static String PHP_FILEPATH = "";
 	public static String SEND_BROADCAST = "off";
 	public static final String SERVER_IP = "10.31.226.148:8080";

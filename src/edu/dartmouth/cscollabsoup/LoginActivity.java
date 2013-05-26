@@ -125,7 +125,10 @@ class loginUser extends AsyncTask<String, String, String> {
 				Intent i = new Intent(getApplicationContext(), MainActivity.class);
 				Globals.USERNAME = username;
 				Globals.PASSWORD = password;
+				Globals.FIRSTNAME = json.getString("firstname");
+				Globals.LASTNAME = json.getString("lastname");
 				startActivity(i);
+				
 				
 				
 				// closing this screen

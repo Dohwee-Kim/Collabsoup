@@ -45,18 +45,7 @@ public class MainActivity extends Activity {
 		}
 		
 
-//		View.OnClickListener addCourseListener = new View.OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				Intent intent = new Intent (MainActivity.this, AddCourses.class);
-//				startActivity(intent);
-//				
-//			}
-//		};
-//		Button addCoursesButton = (Button) findViewById(R.id.btnStart);
-//		addCoursesButton.setOnClickListener(addCourseListener);
-//		
+
 	}
 	
 	@Override
