@@ -204,7 +204,7 @@ public class ParseDataHelper extends Activity {
 			// getting JSON Object
 			// Note that create product url accepts POST method
 			String url_name = "http://"+Globals.SERVER_IP+"/collabsoup/"+Globals.PHP_FILEPATH;
-			Log.d("PHPFILEPATH",Globals.PHP_FILEPATH);
+//			Log.d("PHPFILEPATH",Globals.PHP_FILEPATH);
 			JSONObject json = jsonParser.makeHttpRequest(url_name,"POST", params[0]);
 			
 			// check log cat for response
@@ -214,15 +214,18 @@ public class ParseDataHelper extends Activity {
 			try 
 			{
 				int success = json.getInt(TAG_SUCCESS);
-			
+				
+				
 				if (success == 1)
 				{
 					Log.d("Collabsoup","SUCCESSFULLY POSTED TO SERVER");
 					if ((Globals.SEND_BROADCAST).equals("on")) {
 						// successfully created product
-						System.out.println("ON SEND BROADCAST");
-						for(int j=0; j< json.length()-1;j++)
-							System.out.println(json.getString(String.valueOf(j)));
+//						System.out.println("ON SEND BROADCAST");
+						for(int j=0; j< json.length();j++)
+							if(json.has(String.valueOf(j)))
+								System.out.println(json.getString(String.valueOf(j)));
+						
 					}
 				}
 				else 
@@ -237,4 +240,7 @@ public class ParseDataHelper extends Activity {
 			return null;
 		}
 		}
+
+	
+
 	}	
