@@ -20,8 +20,8 @@ public abstract class Globals
 	public static String USERNAME = "";
 	public static  String PASSWORD = "";
 	public static String PHP_FILEPATH = "";
-
-	public static final String SERVER_IP = "10.31.234.243:8080";
+	public static String SEND_BROADCAST = "off";
+	public static final String SERVER_IP = "10.31.226.148:8080";
 	
 
 }

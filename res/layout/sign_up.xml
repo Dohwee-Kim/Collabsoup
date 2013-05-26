@@ -19,7 +19,7 @@
         android:id = "@+id/ui_sign_up_edit_first_name"
         android:layout_width = "match_parent"
         android:layout_height = "wrap_content"
-        android:editable = "false"/>
+        android:inputType = "textPersonName"/>
     
     <TextView
         android:id = "@+id/ui_sign_up_last_name"
@@ -31,7 +31,7 @@
         android:id = "@+id/ui_sign_up_edit_last_name"
         android:layout_width = "match_parent"
         android:layout_height = "wrap_content"
-        android:editable = "false" />
+       android:inputType = "textPersonName"/>
     
     <TextView
         android:id = "@+id/ui_sign_up_email"
@@ -43,7 +43,7 @@
         android:id = "@+id/ui_sign_up_edit_email"
         android:layout_width = "match_parent"
         android:layout_height = "wrap_content"
-        android:editable = "false" />
+        android:inputType = "textEmailAddress" />
     
     <TextView
         android:id = "@+id/ui_sign_up_confirm_email"
@@ -55,7 +55,7 @@
         android:id = "@+id/ui_sign_up_edit_confirm_email"
         android:layout_width = "match_parent"
         android:layout_height = "wrap_content"
-        android:editable = "false" />
+        android:inputType = "textEmailAddress"/>
     
     <TextView
         android:id = "@+id/ui_sign_up_password"
@@ -67,7 +67,7 @@
         android:id = "@+id/ui_sign_up_edit_password"
         android:layout_width = "match_parent"
         android:layout_height = "wrap_content"
-        android:editable = "false" />
+        android:inputType = "textPassword" />
     
     <TextView
         android:id = "@+id/ui_sign_up_confirm_password"
@@ -79,7 +79,7 @@
         android:id = "@+id/ui_sign_up_edit_confirm_password"
         android:layout_width = "match_parent"
         android:layout_height = "wrap_content"
-        android:editable = "false" />
+        android:inputType = "textPassword" />
     
     
 	<Button

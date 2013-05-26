@@ -54,8 +54,9 @@
     </string-array>
 	<string name="ui_add_course_course_number">Course Number:</string>
 	<string name="ui_add_course_button">Add Course</string>
-	<!-- Add Courses -->
+	<!-- Profile Tab -->
 	<string name="ui_profile_tab_start_title">Profile</string>
+	<string name="ui_profile_broadcast_location">Broadcast My Location</string>
 	<string name="ui_course_tab_start_title">Courses</string>
 	<string name="ui_profile_photo_title">Profile Photo:</string>
 	<string name="ui_profile_photo_content_description">Your Profile Photo</string>

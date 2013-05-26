@@ -5,14 +5,35 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 public class ProfileTabFragment extends Fragment{
 	
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.profile_tab_fragment, container, false);
+    	View view = inflater.inflate(R.layout.profile_tab_fragment, container, false);
+    	
+    	
+        Switch toggle = (Switch)view.findViewById(R.id.user_profile_broadcast_switch);
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    // The switch is on
+                	Globals.SEND_BROADCAST = "on";
+                } else {
+                    // The switch is off
+                	Globals.SEND_BROADCAST = "off";
+                }
+            }
+        });
+		return view;  
         
+       
+
     }
+    
+    
 
 }

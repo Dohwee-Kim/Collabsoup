@@ -75,57 +75,68 @@ public class ParseDataHelper extends Activity {
 		@SuppressWarnings("unchecked")
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			Bundle data = intent.getExtras();
-			mLocation = data.getString("key_bio_location", "");
-			String[] locationLines = mLocation.split(";");
-			int[] distanceArray = new int[locationLines.length];
-			
-			int x=0;
-			int index = 0;
-			int max = -999;
-			String[] locationStat = new String[locationLines.length];
-			
-			
-			
-			for (String line : locationLines) {
+			if ((Globals.SEND_BROADCAST).equals("on")) {
+				Bundle data = intent.getExtras();
+				mLocation = data.getString("key_bio_location", "");
+				String[] locationLines = mLocation.split(";");
 				
-				String[] wifiComponents = line.split(",");
-				
-				locationStat[x] = wifiComponents[1] +", "+wifiComponents[2] + "\n";
-				Log.e("ParseDataHelper", "GOT HERE" + wifiComponents[2]);
-
-				int cur_strength = Integer.parseInt(wifiComponents[2]);
-				if (max < cur_strength)
-				{
-					max = cur_strength;
-					index = x;
+				int x=0;
+				int index = 0;
+				int max = -999;
+				String[] locationStat = new String[locationLines.length];
+				for (String line : locationLines) {
+					
+					String[] wifiComponents = line.split(",");
+					
+					locationStat[x] = wifiComponents[1] +", "+wifiComponents[2] + "\n";
+					Log.e("ParseDataHelper", "GOT HERE" + wifiComponents[2]);
+	
+					int cur_strength = Integer.parseInt(wifiComponents[2]);
+					if (max < cur_strength)
+					{
+						max = cur_strength;
+						index = x;
+					}
+					x++;
+	
 				}
-				x++;
-
+				
+				mLocation = locationStat[index];
+				locationInfo.setText(mLocation);
+				List<NameValuePair> params = new ArrayList<NameValuePair>();
+				// Building Parameters
+				Globals.PHP_FILEPATH = "find_nearby.php";
+				params.add(new BasicNameValuePair("username", Globals.USERNAME));
+				params.add(new BasicNameValuePair("password", Globals.PASSWORD));
+				params.add(new BasicNameValuePair("location", mLocation));
+				params.add(new BasicNameValuePair("send_broadcast", Globals.SEND_BROADCAST));
+				params.add(new BasicNameValuePair("course1", "CS1"));
+				params.add(new BasicNameValuePair("course2", "CS2"));
+				params.add(new BasicNameValuePair("course3", "CS3"));
+				params.add(new BasicNameValuePair("course4", "CS4"));
+				
+				new postToDatabaseTask().execute(params);
 			}
 			
-			mLocation = locationStat[index];
-			locationInfo.setText(mLocation);
-			
-			List<NameValuePair> params = new ArrayList<NameValuePair>();
-			// Building Parameters
-			Globals.PHP_FILEPATH = "location_update.php";
-			params.add(new BasicNameValuePair("username", Globals.USERNAME));
-			params.add(new BasicNameValuePair("password", Globals.PASSWORD));
-			params.add(new BasicNameValuePair("location", mLocation));
-			new postToDatabaseTask().execute(params);
-			
-			params = new ArrayList<NameValuePair>();
-			params.add(new BasicNameValuePair("username", Globals.USERNAME));
-			params.add(new BasicNameValuePair("password", Globals.PASSWORD));
-			params.add(new BasicNameValuePair("course1", "CS1"));
-			params.add(new BasicNameValuePair("course2", "CS2"));
-			params.add(new BasicNameValuePair("course3", "CS3"));
-			params.add(new BasicNameValuePair("course4", "CS4"));
-			Globals.PHP_FILEPATH = "find_nearby.php";
-			new postToDatabaseTask().execute(params);
-			
-//			Log.e("ParseDataHelper", "location" + mLocation);
+			else {
+				mLocation = "";
+				
+				List<NameValuePair> params = new ArrayList<NameValuePair>();
+				// Building Parameters
+				Globals.PHP_FILEPATH = "find_nearby.php";
+				params.add(new BasicNameValuePair("username", Globals.USERNAME));
+				params.add(new BasicNameValuePair("password", Globals.PASSWORD));
+				params.add(new BasicNameValuePair("location", mLocation));
+				params.add(new BasicNameValuePair("send_broadcast", Globals.SEND_BROADCAST));				
+				params.add(new BasicNameValuePair("course1", "CS1"));
+				params.add(new BasicNameValuePair("course2", "CS2"));
+				params.add(new BasicNameValuePair("course3", "CS3"));
+				params.add(new BasicNameValuePair("course4", "CS4"));
+				
+				new postToDatabaseTask().execute(params);
+				
+	//			Log.e("ParseDataHelper", "location" + mLocation);
+			}
 		}
 	};
 
@@ -133,6 +144,7 @@ public class ParseDataHelper extends Activity {
 	private BroadcastReceiver conversationReceiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
+			
 			Bundle data = intent.getExtras();
 			mConversation = data.getString("key_bio_conversation", "");
 			String[] conversationComponents = mConversation.split(",");
@@ -152,6 +164,7 @@ public class ParseDataHelper extends Activity {
 //			params.add(new BasicNameValuePair("location", mConversation));
 //			postToDatabase(params, "conversation_update.php");
 //			Log.e("MainActivity", "conversation" + mConversation);
+		
 		}
 	};
 
@@ -166,6 +179,7 @@ public class ParseDataHelper extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.parsetesting);
 		
@@ -184,15 +198,13 @@ public class ParseDataHelper extends Activity {
 	
 	
 	class postToDatabaseTask extends AsyncTask<List<NameValuePair>, String, Void> {
-
-		/**
-		 * Creating product
-		 * */
 		protected Void doInBackground(List<NameValuePair>... params) 
 		{
+			
 			// getting JSON Object
 			// Note that create product url accepts POST method
 			String url_name = "http://"+Globals.SERVER_IP+"/collabsoup/"+Globals.PHP_FILEPATH;
+			Log.d("PHPFILEPATH",Globals.PHP_FILEPATH);
 			JSONObject json = jsonParser.makeHttpRequest(url_name,"POST", params[0]);
 			
 			// check log cat for response
@@ -202,25 +214,20 @@ public class ParseDataHelper extends Activity {
 			try 
 			{
 				int success = json.getInt(TAG_SUCCESS);
-				
+			
 				if (success == 1)
 				{
-					// successfully created product
 					Log.d("Collabsoup","SUCCESSFULLY POSTED TO SERVER");
-					for(int j=0; j< json.length()-1;j++)
-						System.out.println(json.getString(String.valueOf(j)));
-					
-					
-					// closing this screen
-//					finish();
+					if ((Globals.SEND_BROADCAST).equals("on")) {
+						// successfully created product
+						System.out.println("ON SEND BROADCAST");
+						for(int j=0; j< json.length()-1;j++)
+							System.out.println(json.getString(String.valueOf(j)));
+					}
 				}
-				
-			
 				else 
-				{
-					// failed to create product
 					Log.d("CollabSoup:SignUpActivity","Failed to register ");
-				}
+
 			} 
 			catch (JSONException e) 
 			{
@@ -229,16 +236,5 @@ public class ParseDataHelper extends Activity {
 
 			return null;
 		}
-
 		}
-
-//		/**
-//		 * After completing background task Dismiss the progress dialog
-//		 * **/
-//		protected void onPostExecute(String file_url) 
-//		{
-//			// dismiss the dialog once done
-//			pDialog.dismiss();
-//		}
-
 	}	
