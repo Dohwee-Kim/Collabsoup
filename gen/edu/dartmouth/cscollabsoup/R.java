@@ -35,12 +35,12 @@ public final class R {
         public static final int button1=0x7f090008;
         public static final int colocationInfo=0x7f09000d;
         public static final int conversationInfo=0x7f09000f;
-        public static final int editText1=0x7f090005;
-        public static final int editText2=0x7f090007;
         public static final int editText3=0x7f090006;
         public static final int editText4=0x7f090004;
         public static final int holder=0x7f09000a;
         public static final int locationInfo=0x7f09000e;
+        public static final int login_password=0x7f090007;
+        public static final int login_username=0x7f090005;
         public static final int profile_tab_title=0x7f090010;
         public static final int scrollView1=0x7f09000b;
         public static final int spinnerActivityType=0x7f090001;
