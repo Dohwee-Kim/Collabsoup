@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,6 +17,8 @@ import edu.dartmouth.cscollabsoup.R;
 import android.app.Fragment;
 import android.app.Activity;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +26,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.app.ActionBar;
@@ -68,6 +72,7 @@ public class ParseDataHelper extends Activity {
 	
 	
 	private BroadcastReceiver locationReceiver = new BroadcastReceiver() {
+		@SuppressWarnings("unchecked")
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			Bundle data = intent.getExtras();
@@ -76,6 +81,8 @@ public class ParseDataHelper extends Activity {
 			int[] distanceArray = new int[locationLines.length];
 			
 			int x=0;
+			int index = 0;
+			int max = -999;
 			String[] locationStat = new String[locationLines.length];
 			
 			
@@ -86,26 +93,38 @@ public class ParseDataHelper extends Activity {
 				
 				locationStat[x] = wifiComponents[1] +", "+wifiComponents[2] + "\n";
 				Log.e("ParseDataHelper", "GOT HERE" + wifiComponents[2]);
-				distanceArray[x] = Integer.parseInt(wifiComponents[2]);
-				
+
+				int cur_strength = Integer.parseInt(wifiComponents[2]);
+				if (max < cur_strength)
+				{
+					max = cur_strength;
+					index = x;
+				}
 				x++;
+
 			}
 			
-			for (int i =0; i<distanceArray.length; i++)
-				System.out.println(distanceArray[i]);
-			int m = maxPos(distanceArray);
-			System.out.println(m);
-			mLocation = locationStat[m];
+			mLocation = locationStat[index];
 			locationInfo.setText(mLocation);
 			
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
 			// Building Parameters
-
+			Globals.PHP_FILEPATH = "location_update.php";
 			params.add(new BasicNameValuePair("username", Globals.USERNAME));
 			params.add(new BasicNameValuePair("password", Globals.PASSWORD));
 			params.add(new BasicNameValuePair("location", mLocation));
-
-			postToDatabase( params, "location_update.php");
+			new postToDatabaseTask().execute(params);
+			
+			params = new ArrayList<NameValuePair>();
+			params.add(new BasicNameValuePair("username", Globals.USERNAME));
+			params.add(new BasicNameValuePair("password", Globals.PASSWORD));
+			params.add(new BasicNameValuePair("course1", "CS1"));
+			params.add(new BasicNameValuePair("course2", "CS2"));
+			params.add(new BasicNameValuePair("course3", "CS3"));
+			params.add(new BasicNameValuePair("course4", "CS4"));
+			Globals.PHP_FILEPATH = "find_nearby.php";
+			new postToDatabaseTask().execute(params);
+			
 //			Log.e("ParseDataHelper", "location" + mLocation);
 		}
 	};
@@ -131,9 +150,7 @@ public class ParseDataHelper extends Activity {
 //			params.add(new BasicNameValuePair("username", Globals.USERNAME));
 //			params.add(new BasicNameValuePair("password", Globals.PASSWORD));
 //			params.add(new BasicNameValuePair("location", mConversation));
-//
 //			postToDatabase(params, "conversation_update.php");
-
 //			Log.e("MainActivity", "conversation" + mConversation);
 		}
 	};
@@ -147,53 +164,6 @@ public class ParseDataHelper extends Activity {
 		return dateFormat.format(calendar.getTime());
 	}
 
-	//finds the POSITION of max value in int array
-	private static int maxPos(int[] chars) {
-		int max = 0;
-		for (int ktr = 0; ktr < chars.length; ktr++) {
-			if (chars[ktr] > max) {
-				max = ktr;
-			}
-		}
-		return max;
-	}
-	
-	private void postToDatabase(List<NameValuePair> params, String php_filename) {
-	
-		// getting JSON Object
-		// Note that create product url accepts POST method
-		String url_name = "http://"+Globals.SERVER_IP+"/collabsoup/"+php_filename;
-		JSONObject json = jsonParser.makeHttpRequest(url_name,"POST", params);
-		
-		// check log cat for response
-		Log.d("Create Response", json.toString());
-
-		// check for success tag
-		try 
-		{
-			int success = json.getInt(TAG_SUCCESS);
-			
-			if (success == 1)
-			{
-				// successfully created product
-				Log.d("Collabsoup","SUCCESSFULLY POSTED TO SERVER");
-				
-				// closing this screen
-//				finish();
-			}
-			else 
-			{
-				// failed to create product
-				Log.d("CollabSoup:SignUpActivity","Failed to regitser ");
-			}
-		} 
-		catch (JSONException e) 
-		{
-			e.printStackTrace();
-		}
-	}
-				
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -209,6 +179,66 @@ public class ParseDataHelper extends Activity {
 		// registerReceiver(colocationReceiver, new IntentFilter("bio_colocation"));
 		registerReceiver(locationReceiver, new IntentFilter("bio_location"));
 		
-		registerReceiver(conversationReceiver, new IntentFilter("bio_conversation"));
+//		registerReceiver(conversationReceiver, new IntentFilter("bio_conversation"));
 	}
-}
+	
+	
+	class postToDatabaseTask extends AsyncTask<List<NameValuePair>, String, Void> {
+
+		/**
+		 * Creating product
+		 * */
+		protected Void doInBackground(List<NameValuePair>... params) 
+		{
+			// getting JSON Object
+			// Note that create product url accepts POST method
+			String url_name = "http://"+Globals.SERVER_IP+"/collabsoup/"+Globals.PHP_FILEPATH;
+			JSONObject json = jsonParser.makeHttpRequest(url_name,"POST", params[0]);
+			
+			// check log cat for response
+			Log.d("Create Response", json.toString());
+
+			// check for success tag
+			try 
+			{
+				int success = json.getInt(TAG_SUCCESS);
+				
+				if (success == 1)
+				{
+					// successfully created product
+					Log.d("Collabsoup","SUCCESSFULLY POSTED TO SERVER");
+					for(int j=0; j< json.length()-1;j++)
+						System.out.println(json.getString(String.valueOf(j)));
+					
+					
+					// closing this screen
+//					finish();
+				}
+				
+			
+				else 
+				{
+					// failed to create product
+					Log.d("CollabSoup:SignUpActivity","Failed to register ");
+				}
+			} 
+			catch (JSONException e) 
+			{
+				e.printStackTrace();
+			}
+
+			return null;
+		}
+
+		}
+
+//		/**
+//		 * After completing background task Dismiss the progress dialog
+//		 * **/
+//		protected void onPostExecute(String file_url) 
+//		{
+//			// dismiss the dialog once done
+//			pDialog.dismiss();
+//		}
+
+	}	
