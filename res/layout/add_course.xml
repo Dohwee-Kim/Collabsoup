@@ -11,7 +11,7 @@
     </TextView>
 
     <Spinner
-        android:id="@+id/spinnerInputType"
+        android:id="@+id/dpmt_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -26,7 +26,7 @@
     </TextView>
 
     <Spinner
-        android:id="@+id/spinnerActivityType"
+        android:id="@+id/course_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp" >
@@ -41,6 +41,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="100dp"
+        android:onClick="onAddCourseClicked"
         android:text="@string/ui_add_course_button" />
 
 

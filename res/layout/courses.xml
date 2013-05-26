@@ -8,15 +8,36 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         
-	<ListView
-        android:id="@id/android:list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </ListView>
+	<TextView
+	    android:id="@+id/first_course"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+
+	    android:text = " " />
+	
+	<TextView
+	    android:id="@+id/second_course"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+
+	    android:text= " " />
+	
+	<TextView
+	    android:id="@+id/third_course"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+
+	    android:text=" " />
+	<TextView
+	    android:id="@+id/fourth_course"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+
+	    android:text = " " />
     
     
     <Button
-        android:id="@+id/btnStart"
+        android:id="@+id/coursePickerButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
