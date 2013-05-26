@@ -9,21 +9,19 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.os.AsyncTask;
-import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
-import android.view.MotionEvent;
+import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.view.View;
-import android.content.ActivityNotFoundException;
-import android.content.Intent;
-import android.graphics.Color;
-import android.util.Log;
 
 
 public class LoginActivity extends Activity{
@@ -64,6 +62,7 @@ public class LoginActivity extends Activity{
 	
 	// **************** button click callback ********************** //
 	
+	//like async task runs in bg
 	public void onSigninClicked(View v){
 		Toast.makeText(getApplicationContext(),
 				"intent from Login to main screen..",
@@ -83,6 +82,7 @@ class loginUser extends AsyncTask<String, String, String> {
 	@Override
 	protected void onPreExecute() 
 	{
+		//shows the little register circle
 		super.onPreExecute();
 		pDialog = new ProgressDialog(LoginActivity.this);
 
@@ -97,9 +97,9 @@ class loginUser extends AsyncTask<String, String, String> {
 	 * */
 	protected String doInBackground(String... args) 
 	{
+		
 		username = ((EditText)findViewById(R.id.login_username)).getText().toString();
 		password = ((EditText)findViewById(R.id.login_password)).getText().toString();
-
 		// Building Parameters
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("username", username));
@@ -123,7 +123,10 @@ class loginUser extends AsyncTask<String, String, String> {
 			{
 				// successfully created product
 				Intent i = new Intent(getApplicationContext(), MainActivity.class);
+				Globals.USERNAME = username;
+				Globals.PASSWORD = password;
 				startActivity(i);
+				
 				
 				// closing this screen
 				finish();

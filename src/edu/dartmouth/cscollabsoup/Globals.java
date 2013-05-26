@@ -17,6 +17,10 @@ public abstract class Globals
 	public static final String PROFILE_KEY_LASTNAME = "lname";
 	public static final String PROFILE_KEY_EMAIL = "email";
 	public static final String PROFILE_KEY_PASSWORD = "password";
+	public static String USERNAME = "";
+	public static  String PASSWORD = "";
+
 	public static final String SERVER_IP = "10.31.234.243:8080";
+	
 
 }

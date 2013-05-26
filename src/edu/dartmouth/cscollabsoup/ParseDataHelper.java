@@ -3,7 +3,14 @@ package edu.dartmouth.cscollabsoup;
 
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import edu.dartmouth.cscollabsoup.R;
 import android.app.Fragment;
@@ -35,6 +42,8 @@ public class ParseDataHelper extends Activity {
 	private TextView colocationInfo;
 	private TextView locationInfo;
 	private TextView conversationInfo;
+	JSONParser jsonParser = new JSONParser();
+	private static final String TAG_SUCCESS = "success";
 	
 	public static final String DATE_FORMAT = "H:mm:ss MMM d yyyy";
 	
@@ -89,6 +98,14 @@ public class ParseDataHelper extends Activity {
 			mLocation = locationStat[m];
 			locationInfo.setText(mLocation);
 			
+			List<NameValuePair> params = new ArrayList<NameValuePair>();
+			// Building Parameters
+
+			params.add(new BasicNameValuePair("username", Globals.USERNAME));
+			params.add(new BasicNameValuePair("password", Globals.PASSWORD));
+			params.add(new BasicNameValuePair("location", mLocation));
+
+			postToDatabase( params, "location_update.php");
 //			Log.e("ParseDataHelper", "location" + mLocation);
 		}
 	};
@@ -107,7 +124,17 @@ public class ParseDataHelper extends Activity {
 			conversationInfo.setText("last conversation at: "
 					+ parseTime(Double.valueOf(conversationComponents[1])
 							.longValue() / 1000));
-			Log.e("MainActivity", "conversation" + mConversation);
+
+			
+//			List<NameValuePair> params = new ArrayList<NameValuePair>();
+//			// Building Parameters
+//			params.add(new BasicNameValuePair("username", Globals.USERNAME));
+//			params.add(new BasicNameValuePair("password", Globals.PASSWORD));
+//			params.add(new BasicNameValuePair("location", mConversation));
+//
+//			postToDatabase(params, "conversation_update.php");
+
+//			Log.e("MainActivity", "conversation" + mConversation);
 		}
 	};
 
@@ -130,6 +157,42 @@ public class ParseDataHelper extends Activity {
 		}
 		return max;
 	}
+	
+	private void postToDatabase(List<NameValuePair> params, String php_filename) {
+	
+		// getting JSON Object
+		// Note that create product url accepts POST method
+		String url_name = "http://"+Globals.SERVER_IP+"/collabsoup/"+php_filename;
+		JSONObject json = jsonParser.makeHttpRequest(url_name,"POST", params);
+		
+		// check log cat for response
+		Log.d("Create Response", json.toString());
+
+		// check for success tag
+		try 
+		{
+			int success = json.getInt(TAG_SUCCESS);
+			
+			if (success == 1)
+			{
+				// successfully created product
+				Log.d("Collabsoup","SUCCESSFULLY POSTED TO SERVER");
+				
+				// closing this screen
+//				finish();
+			}
+			else 
+			{
+				// failed to create product
+				Log.d("CollabSoup:SignUpActivity","Failed to regitser ");
+			}
+		} 
+		catch (JSONException e) 
+		{
+			e.printStackTrace();
+		}
+	}
+				
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
