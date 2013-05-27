@@ -85,6 +85,7 @@ public class DeleteCourses extends Activity{
  					Globals.courseInfo.remove(4);
  					Globals.NUMBER_OF_COURSES-=1;
  				}
+ 				setResult(1);
  				finish();
  			}
  	});
