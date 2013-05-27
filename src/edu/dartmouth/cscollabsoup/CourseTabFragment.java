@@ -32,7 +32,7 @@ public class CourseTabFragment extends Fragment {
         View view = inflater.inflate(R.layout.courses, container, false);
         
         mButton = (Button)view.findViewById(R.id.btnSync);
-//        mdeleteButton = (Button)view.findViewById(R.id.courseDeleteButton);
+        mdeleteButton = (Button)view.findViewById(R.id.courseDeleteButton);
         mButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click

@@ -5,9 +5,9 @@
     android:background="@drawable/android_backround6">
     
     <LinearLayout
-        android:layout_width ="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="164dp"
+        android:orientation="vertical" >
         
    <TextView
        android:id="@+id/course_tab_title"
@@ -22,8 +22,6 @@
        android:textStyle="bold"
        android:typeface="serif" />
 
-"
-        
 	<TextView
 	    android:id="@+id/first_course"
 	    android:layout_width="match_parent"
@@ -55,16 +53,27 @@
 	    android:paddingBottom="5dp"
 	    android:text=" "
 	    android:textSize="20sp" />
-    
-    <Button
-        android:id="@+id/coursePickerButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="100dp"
-        android:text="@string/ui_courses_add_button" />
+	
+	<Button
+	    android:id="@+id/coursePickerButton"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginBottom="20dp"
+	    android:layout_marginLeft="20dp"
+	    android:layout_marginRight="20dp"
+	    android:layout_marginTop="100dp"
+	    android:text="@string/ui_courses_add_button" />
+
+	<Button
+	    android:id="@+id/courseDeleteButton"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginBottom="20dp"
+	    android:layout_marginLeft="20dp"
+	    android:layout_marginRight="20dp"
+	    android:layout_marginTop="100dp"
+	    android:onClick="onDeleteClicked"
+	    android:text="@string/ui_courses_delete_button" />
     
     <Button
         android:id="@+id/btnSync"

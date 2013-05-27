@@ -231,7 +231,7 @@ public class ParseDataHelper extends Activity {
 						Log.d("NEAREST_NEIGHBORS ASYNC", nearest_neighbors);
 						nearest_neighbors = parseJsonData(to_parse);	
 
-//						publishProgress(nearest_neighbors);
+						publishProgress(nearest_neighbors);
 					}
 				}
 				else 
@@ -246,12 +246,12 @@ public class ParseDataHelper extends Activity {
 			return null;
 		}
 		
-//		protected void onProgressUpdate(String s)
-//		{
-//			super.onProgressUpdate(s);
-//			Log.d("ONPROGRESSUPDATE", s);
-//			locationInfo.setText(s);
-//		}
+		protected void onProgressUpdate(String s)
+		{
+			super.onProgressUpdate(s);
+			Log.d("ONPROGRESSUPDATE", s);
+			locationInfo.setText(s);
+		}
 		}
 	
 	public String parseJsonData(String[] p) {
