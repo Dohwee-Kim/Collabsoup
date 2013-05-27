@@ -12,54 +12,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Activity:"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/activityInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Loading"
-            android:textSize="16sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Colocation:"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/colocationInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Loading"
-            android:textSize="16sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Location:"
-            android:textSize="16sp" />
+            android:text="Nearby Students"
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/locationInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Loading"
+            android:text="Loading..."
             android:textSize="16sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Conversation:"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/conversationInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Loading"
-            android:textSize="16sp" />
     </LinearLayout>
 
 </ScrollView>

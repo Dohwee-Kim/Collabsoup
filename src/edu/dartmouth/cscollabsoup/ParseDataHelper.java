@@ -5,49 +5,41 @@ package edu.dartmouth.cscollabsoup;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.Hashtable;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import edu.dartmouth.cscollabsoup.R;
-import android.app.Fragment;
 import android.app.Activity;
-import android.app.FragmentTransaction;
-import android.app.ProgressDialog;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.app.ActionBar;
-import android.app.ActionBar.Tab;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
+import android.widget.TextView;
 
 public class ParseDataHelper extends Activity {
 	private String mActivity;
 	private String mColocation;
 	private String mLocation;
 	private String mConversation;
-
+	private String nearest_neighbors="";
 	private TextView activityInfo;
 	private TextView colocationInfo;
 	private TextView locationInfo;
 	private TextView conversationInfo;
+	Handler mHandler = new Handler();
+	
+	
 	JSONParser jsonParser = new JSONParser();
 	private static final String TAG_SUCCESS = "success";
+	Hashtable<String, ArrayList<String>> user_to_courses = new Hashtable<String, ArrayList<String>>();
 	
 	public static final String DATE_FORMAT = "H:mm:ss MMM d yyyy";
 	
@@ -64,8 +56,9 @@ public class ParseDataHelper extends Activity {
 						+ parseTime(Double.valueOf(bluetoothComponents[0]).longValue())+","
 						+ bluetoothComponents[1] +","+ bluetoothComponents[2] + "\n";
 			}
+			
 			mColocation = colocationStat;
-			colocationInfo.setText(mColocation);
+			//colocationInfo.setText(mColocation);
 			Log.e("ParseDataHelper", "colocation" + mColocation);
 		}
 	};
@@ -87,10 +80,7 @@ public class ParseDataHelper extends Activity {
 				for (String line : locationLines) {
 					
 					String[] wifiComponents = line.split(",");
-					
 					locationStat[x] = wifiComponents[1] +", "+wifiComponents[2] + "\n";
-					Log.e("ParseDataHelper", "GOT HERE" + wifiComponents[2]);
-	
 					int cur_strength = Integer.parseInt(wifiComponents[2]);
 					if (max < cur_strength)
 					{
@@ -98,11 +88,12 @@ public class ParseDataHelper extends Activity {
 						index = x;
 					}
 					x++;
-	
 				}
 				
-				mLocation = locationStat[index];
-				locationInfo.setText(mLocation);
+				String[] loc_string = locationStat[index].split(",");
+				mLocation = loc_string[0];
+				Log.d("LOC",mLocation);
+				
 				List<NameValuePair> params = new ArrayList<NameValuePair>();
 				// Building Parameters
 				Globals.PHP_FILEPATH = "find_nearby.php";
@@ -115,7 +106,12 @@ public class ParseDataHelper extends Activity {
 				params.add(new BasicNameValuePair("course3", "CS3"));
 				params.add(new BasicNameValuePair("course4", "CS4"));
 				
+				//System.out.println(nearest_neighbors);
+				Log.d("NEAREST_NEIGHBORS broad", nearest_neighbors);
+
+//				locationInfo.setText(nearest_neighbors);
 				new postToDatabaseTask().execute(params);
+				
 			}
 			
 			else {
@@ -134,7 +130,7 @@ public class ParseDataHelper extends Activity {
 				params.add(new BasicNameValuePair("course4", "CS4"));
 				
 				new postToDatabaseTask().execute(params);
-				
+//				locationInfo.setText(nearest_neighbors);
 	//			Log.e("ParseDataHelper", "location" + mLocation);
 			}
 		}
@@ -148,10 +144,10 @@ public class ParseDataHelper extends Activity {
 			Bundle data = intent.getExtras();
 			mConversation = data.getString("key_bio_conversation", "");
 			String[] conversationComponents = mConversation.split(",");
-
-			activityInfo.setText(mActivity);
-			colocationInfo.setText(mColocation);
-			locationInfo.setText(mLocation);
+//
+//			activityInfo.setText(mActivity);
+//			colocationInfo.setText(mColocation);
+//			locationInfo.setText(mLocation);
 			conversationInfo.setText("last conversation at: "
 					+ parseTime(Double.valueOf(conversationComponents[1])
 							.longValue() / 1000));
@@ -183,16 +179,22 @@ public class ParseDataHelper extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.parsetesting);
 		
-		activityInfo = (TextView) findViewById(R.id.activityInfo);
-		colocationInfo = (TextView) findViewById(R.id.colocationInfo);
+//		activityInfo = (TextView) findViewById(R.id.activityInfo);
+//		colocationInfo = (TextView) findViewById(R.id.colocationInfo);
 		locationInfo = (TextView) findViewById(R.id.locationInfo);
-		conversationInfo = (TextView) findViewById(R.id.conversationInfo);
+//		conversationInfo = (TextView) findViewById(R.id.conversationInfo);
+		Runnable runnable = new Runnable() {	
+		@Override
+            public void run() {  
 		
-		
-		// co location data 
+			locationInfo.setText(nearest_neighbors);
+//			Log.d("UPDATING", nearest_neighbors);
+			mHandler.postDelayed(this, 1000);
+		}
+		};
+		mHandler.post(runnable);
 		// registerReceiver(colocationReceiver, new IntentFilter("bio_colocation"));
-		registerReceiver(locationReceiver, new IntentFilter("bio_location"));
-		
+		registerReceiver(locationReceiver, new IntentFilter("bio_location"));		
 //		registerReceiver(conversationReceiver, new IntentFilter("bio_conversation"));
 	}
 	
@@ -200,11 +202,9 @@ public class ParseDataHelper extends Activity {
 	class postToDatabaseTask extends AsyncTask<List<NameValuePair>, String, Void> {
 		protected Void doInBackground(List<NameValuePair>... params) 
 		{
-			
 			// getting JSON Object
 			// Note that create product url accepts POST method
 			String url_name = "http://"+Globals.SERVER_IP+"/collabsoup/"+Globals.PHP_FILEPATH;
-//			Log.d("PHPFILEPATH",Globals.PHP_FILEPATH);
 			JSONObject json = jsonParser.makeHttpRequest(url_name,"POST", params[0]);
 			
 			// check log cat for response
@@ -214,18 +214,24 @@ public class ParseDataHelper extends Activity {
 			try 
 			{
 				int success = json.getInt(TAG_SUCCESS);
-				
-				
 				if (success == 1)
 				{
-					Log.d("Collabsoup","SUCCESSFULLY POSTED TO SERVER");
+//					Log.d("Collabsoup","SUCCESSFULLY POSTED TO SERVER");
 					if ((Globals.SEND_BROADCAST).equals("on")) {
 						// successfully created product
 //						System.out.println("ON SEND BROADCAST");
-						for(int j=0; j< json.length();j++)
-							if(json.has(String.valueOf(j)))
-								System.out.println(json.getString(String.valueOf(j)));
-						
+						String[] to_parse = new String[json.length()-2];
+						Log.d("FLOOOO", "String RECEIVED");
+						for(int j=0; j< json.length()-2;j++)
+						{
+//							if(json.has(String.valueOf(j));	
+							to_parse[j] = json.getString(String.valueOf(j));						
+//							Log.d("FLOOOO:jjjjj",String.valueOf(j));
+						}
+						Log.d("NEAREST_NEIGHBORS ASYNC", nearest_neighbors);
+						nearest_neighbors = parseJsonData(to_parse);	
+					
+					
 					}
 				}
 				else 
@@ -240,7 +246,56 @@ public class ParseDataHelper extends Activity {
 			return null;
 		}
 		}
+	
+	public String parseJsonData(String[] p) {
+		//convert array to m so each row corresponds to one row in m
+		String[][] m = new String[p.length/5][5];
+		int i = 0;
+		int j = 0;
+		String s = "";
+		for (int x = 0; x < p.length; x++)
+			if (j == 4) {
+				m[i][j] = p[x];
+				j = 0;
+				i++;
+			}
+			else {
+				m[i][j] = p[x];
+				j++;
+			}
+
+		int rows = m.length;
+		for(i = 0; i < rows; i++)
+		{
+//		 |	Betty	Huang	betty	sudikoff-1-2-ap, -56	CS1	|
+			String usrname = m[i][2];
+			if (usrname.equals(Globals.USERNAME)) {}
+			else
+			{
+				//username already exists
+				if (user_to_courses.containsKey(usrname)) { 
+					//just add course
+					user_to_courses.get(usrname).add(m[i][4]);
+				}
+				else
+				{
+					ArrayList<String> arr = new ArrayList<String>();
+					arr.add(m[i][0]); //first name
+					arr.add(m[i][1]); //last name
+					arr.add(m[i][3]); //location
+					arr.add(m[i][4]); //course
+					user_to_courses.put(usrname, arr);
+					s = Utils.hashToString(user_to_courses);
+				}
+			}
+				
+		}
+//		System.out.println(s);
+		return s;
+	}
+
+	}
 
 	
 
-	}	
+

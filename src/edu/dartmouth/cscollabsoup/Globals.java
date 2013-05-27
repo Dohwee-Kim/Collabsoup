@@ -25,7 +25,7 @@ public abstract class Globals
 	public static String LASTNAME = "";
 	public static String PHP_FILEPATH = "";
 	public static String SEND_BROADCAST = "off";
-	public static final String SERVER_IP = "10.31.226.148:8080";
+	public static final String SERVER_IP = "10.31.226.47:8080";
 	
 	
 	// for holds chosen courses 
