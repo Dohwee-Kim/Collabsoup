@@ -188,7 +188,7 @@ public class ParseDataHelper extends Activity {
             public void run() {  
 		
 			locationInfo.setText(nearest_neighbors);
-//			Log.d("UPDATING", nearest_neighbors);
+			Log.d("UPDATING IN HANDLER", nearest_neighbors);
 			mHandler.postDelayed(this, 1000);
 		}
 		};
@@ -229,8 +229,51 @@ public class ParseDataHelper extends Activity {
 //							Log.d("FLOOOO:jjjjj",String.valueOf(j));
 						}
 						Log.d("NEAREST_NEIGHBORS ASYNC", nearest_neighbors);
-						nearest_neighbors = parseJsonData(to_parse);	
-					
+//						nearest_neighbors = parseJsonData(to_parse);	
+						String[][] m = new String[to_parse.length/5][5];
+						int i = 0;
+						int j = 0;
+						String s = "";
+						for (int x = 0; x < to_parse.length; x++)
+							if (j == 4) {
+								m[i][j] = to_parse[x];
+								
+								j = 0;
+								i++;
+							}
+							else {
+								m[i][j] = to_parse[x];
+								j++;
+							}
+
+						int rows = m.length;
+						for(i = 0; i < rows; i++)
+						{
+//						 |	Betty	Huang	betty	sudikoff-1-2-ap, -56	CS1	|
+							String usrname = m[i][2];
+							if (usrname.equals(Globals.USERNAME)) {}
+							else
+							{
+								//username already exists
+								if (user_to_courses.containsKey(usrname)) { 
+									//just add course
+									user_to_courses.get(usrname).add(m[i][4]);
+								}
+								else
+								{
+									ArrayList<String> arr = new ArrayList<String>();
+									arr.add(m[i][0]); //first name
+									arr.add(m[i][1]); //last name
+									arr.add(m[i][3]); //location
+									arr.add(m[i][4]); //course
+									user_to_courses.put(usrname, arr);
+									s = Utils.hashToString(user_to_courses);
+								}
+							}
+								
+						}
+						publishProgress(nearest_neighbors);
+						
 					
 					}
 				}
@@ -245,6 +288,13 @@ public class ParseDataHelper extends Activity {
 
 			return null;
 		}
+		
+		protected void onProgressUpdate(String s)
+		{
+			super.onProgressUpdate(s);
+			Log.d("ONPROGRESSUPDATE", s);
+			locationInfo.setText(s);
+		}
 		}
 	
 	public String parseJsonData(String[] p) {
@@ -256,6 +306,7 @@ public class ParseDataHelper extends Activity {
 		for (int x = 0; x < p.length; x++)
 			if (j == 4) {
 				m[i][j] = p[x];
+				
 				j = 0;
 				i++;
 			}
@@ -290,7 +341,7 @@ public class ParseDataHelper extends Activity {
 			}
 				
 		}
-//		System.out.println(s);
+
 		return s;
 	}
 

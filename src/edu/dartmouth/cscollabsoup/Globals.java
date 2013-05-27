@@ -33,7 +33,7 @@ public abstract class Globals
 	public static int NUMBER_OF_COURSES = 0;
 	static ArrayList<ArrayList<String>> courseInfo = new ArrayList<ArrayList<String>>();
 	
-	//public static HashMap<string, string> courseHashMap = new HashMap<string, string="">();
+//public static HashMap<string, string> courseHashMap = new HashMap<string, string="">();
 //	public static boolean IS_COURSE1_ADDED = false;
 //	public static String COURSE1_NAME = "";
 //	public static String COURSE1_NUMBER="";
