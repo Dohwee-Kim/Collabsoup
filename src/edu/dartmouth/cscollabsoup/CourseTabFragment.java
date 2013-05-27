@@ -24,6 +24,9 @@ public class CourseTabFragment extends Fragment {
 	private Button mButton, mAddCoursesButton, mdeleteButton;
 	private static final String TAG = "COLLAB";
 	private int first_check_flag = 0;
+	public static final int REQUEST_CODE = 1;
+	int code = 1;
+	
 	
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,10 +67,22 @@ public class CourseTabFragment extends Fragment {
         return view;
     }
     
+    @Override
+	public void onActivityResult(int requestCode, int resultCode, Intent intent)
+    {
+    	Log.d(Globals.TAG, "in onActivityResult");
+    	super.onActivityResult(requestCode, resultCode, intent);
+    	
+    	if (requestCode == REQUEST_CODE)
+    	{
+    		updateTextView();
+    	}
+    }
+    
     public void onDeleteClicked(View v){
 		// Later , need to implement putExtra for additional log in info  
 		Intent intent = new Intent(mContext, DeleteCourses.class);
-		startActivity(intent);
+		startActivityForResult(intent, code);
     }
     
     public void onSyncClicked(View v){
