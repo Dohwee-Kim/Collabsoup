@@ -34,17 +34,27 @@
 	    android:layout_height="wrap_content"
 
 	    android:text = " " />
-    
+
+	<Button
+	    android:id="@+id/coursePickerButton"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginBottom="20dp"
+	    android:layout_marginLeft="20dp"
+	    android:layout_marginRight="20dp"
+	    android:layout_marginTop="100dp"
+	    android:text="@string/ui_courses_add_button" />
     
     <Button
-        android:id="@+id/coursePickerButton"
+        android:id="@+id/courseDeleteButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="100dp"
-        android:text="@string/ui_courses_add_button" />
+        android:onClick="onDeleteClicked"
+        android:text="@string/ui_courses_delete_button" />
     
     <Button
         android:id="@+id/btnSync"

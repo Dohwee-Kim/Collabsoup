@@ -27,52 +27,53 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int NoAccountTextView=0x7f09000e;
-        public static final int action_settings=0x7f090026;
-        public static final int activityInfo=0x7f090011;
+        public static final int NoAccountTextView=0x7f09000f;
+        public static final int action_settings=0x7f090027;
+        public static final int activityInfo=0x7f090012;
         public static final int btnStart=0x7f090002;
-        public static final int btnSync=0x7f090008;
-        public static final int button1=0x7f09000d;
-        public static final int colocationInfo=0x7f090012;
-        public static final int conversationInfo=0x7f090014;
+        public static final int btnSync=0x7f090009;
+        public static final int button1=0x7f09000e;
+        public static final int colocationInfo=0x7f090013;
+        public static final int conversationInfo=0x7f090015;
+        public static final int courseDeleteButton=0x7f090008;
         public static final int coursePickerButton=0x7f090007;
         public static final int course_spinner=0x7f090001;
         public static final int dpmt_spinner=0x7f090000;
-        public static final int editText3=0x7f09000b;
-        public static final int editText4=0x7f090009;
+        public static final int editText3=0x7f09000c;
+        public static final int editText4=0x7f09000a;
         public static final int first_course=0x7f090003;
         public static final int fourth_course=0x7f090006;
-        public static final int holder=0x7f09000f;
-        public static final int locationInfo=0x7f090013;
-        public static final int login_password=0x7f09000c;
-        public static final int login_username=0x7f09000a;
-        public static final int profile_tab_title=0x7f090015;
-        public static final int scrollView1=0x7f090010;
+        public static final int holder=0x7f090010;
+        public static final int locationInfo=0x7f090014;
+        public static final int login_password=0x7f09000d;
+        public static final int login_username=0x7f09000b;
+        public static final int profile_tab_title=0x7f090016;
+        public static final int scrollView1=0x7f090011;
         public static final int second_course=0x7f090004;
         public static final int third_course=0x7f090005;
-        public static final int ui_sign_up_confirm_email=0x7f090020;
-        public static final int ui_sign_up_confirm_password=0x7f090024;
-        public static final int ui_sign_up_edit_confirm_email=0x7f090021;
-        public static final int ui_sign_up_edit_confirm_password=0x7f090025;
-        public static final int ui_sign_up_edit_email=0x7f09001f;
-        public static final int ui_sign_up_edit_first_name=0x7f09001b;
-        public static final int ui_sign_up_edit_last_name=0x7f09001d;
-        public static final int ui_sign_up_edit_password=0x7f090023;
-        public static final int ui_sign_up_email=0x7f09001e;
-        public static final int ui_sign_up_first_name=0x7f09001a;
-        public static final int ui_sign_up_last_name=0x7f09001c;
-        public static final int ui_sign_up_password=0x7f090022;
-        public static final int user_profile_broadcast_switch=0x7f090019;
-        public static final int user_profile_tab_first_name=0x7f090017;
-        public static final int user_profile_tab_last_name=0x7f090018;
-        public static final int user_profile_tab_name=0x7f090016;
+        public static final int ui_sign_up_confirm_email=0x7f090021;
+        public static final int ui_sign_up_confirm_password=0x7f090025;
+        public static final int ui_sign_up_edit_confirm_email=0x7f090022;
+        public static final int ui_sign_up_edit_confirm_password=0x7f090026;
+        public static final int ui_sign_up_edit_email=0x7f090020;
+        public static final int ui_sign_up_edit_first_name=0x7f09001c;
+        public static final int ui_sign_up_edit_last_name=0x7f09001e;
+        public static final int ui_sign_up_edit_password=0x7f090024;
+        public static final int ui_sign_up_email=0x7f09001f;
+        public static final int ui_sign_up_first_name=0x7f09001b;
+        public static final int ui_sign_up_last_name=0x7f09001d;
+        public static final int ui_sign_up_password=0x7f090023;
+        public static final int user_profile_broadcast_switch=0x7f09001a;
+        public static final int user_profile_tab_first_name=0x7f090018;
+        public static final int user_profile_tab_last_name=0x7f090019;
+        public static final int user_profile_tab_name=0x7f090017;
     }
     public static final class layout {
         public static final int add_course=0x7f030000;
         public static final int courses=0x7f030001;
-        public static final int log_in=0x7f030002;
-        public static final int map=0x7f030003;
-        public static final int nearby_students_listview=0x7f030004;
+        public static final int delete_course=0x7f030002;
+        public static final int log_in=0x7f030003;
+        public static final int map=0x7f030004;
         public static final int parsetesting=0x7f030005;
         public static final int profile_tab_fragment=0x7f030006;
         public static final int sign_up=0x7f030007;
@@ -96,6 +97,7 @@ public final class R {
  Courses Layout 
          */
         public static final int ui_courses_add_button=0x7f05000d;
+        public static final int ui_courses_delete_button=0x7f05001e;
         public static final int ui_courses_show_button=0x7f05000e;
         /**  Login Layout 
          */

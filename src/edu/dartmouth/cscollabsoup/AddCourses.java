@@ -1,6 +1,7 @@
 package edu.dartmouth.cscollabsoup;
 
 import android.app.Activity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +12,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import java.util.HashMap;
+import java.util.ArrayList;
+import edu.dartmouth.cscollabsoup.Globals;   // need to access global variable 
 
 public class AddCourses extends Activity{
 
@@ -40,42 +46,20 @@ public class AddCourses extends Activity{
 		String department = (String) mSpinnerDpmt.getSelectedItem();
 		String courseNumber = (String) mSpinnerCourseNumber.getSelectedItem();
 		
-		SharedPreferences s_pref = PreferenceManager.getDefaultSharedPreferences(v.getContext());
-		Editor edit=s_pref.edit();
+		// if User already enrolled 4 courses 
+		if (Globals.NUMBER_OF_COURSES == 4){
+			Toast.makeText(getApplicationContext(), "You already have 4 courses, Cannot add more !",
+					Toast.LENGTH_SHORT).show();
+			finish();
+		}
+		else{
+			ArrayList<String> courseInfo = new ArrayList<String>();
+			courseInfo.add(department);
+			courseInfo.add(courseNumber);
+			Globals.courseInfo.add(courseInfo);
+			Globals.NUMBER_OF_COURSES +=1;
+			finish();
+		}
 		
-		String course1Value = s_pref.getString("course1", "notset");
-		String course2Value = s_pref.getString("course2", "notset");
-		String course3Value = s_pref.getString("course3", "notset");
-		String course4Value = s_pref.getString("course4", "notset");
-
-		Log.d(TAG, course1Value);
-//		Log.d(TAG, course2Value);
-//		Log.d(TAG, course3Value);
-//		Log.d(TAG, course4Value);
-//		
-		if (course1Value.equals("notset"))
-		{
-			Log.d(TAG, "course 1 putString");
-			edit.putString("course1", department + " " + courseNumber);
-		}
-		else if (course2Value.equals("notset"))
-		{
-			Log.d(TAG, "course 2 putString");
-			edit.putString("course2", department + " " + courseNumber);
-		}
-		else if (course3Value.equals("notset"))
-		{
-			Log.d(TAG, "course 3 putString");
-			edit.putString("course3", department + " " + courseNumber);
-		}
-		else if (course4Value.equals("notset"))
-		{
-			Log.d(TAG, "course 4 putString");
-			edit.putString("course4", department + " " + courseNumber);
-		}
-
-        edit.commit();
-        
-		finish();
-    }
+	}
 }

@@ -50,6 +50,14 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="edu.dartmouth.cscollabsoup.DeleteCourses">
+            <intent-filter>
+                <action android:name="android.intent.action.DeleteCourses" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
     </application>
 
 </manifest>

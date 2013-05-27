@@ -1,5 +1,9 @@
 package edu.dartmouth.cscollabsoup;
 
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
+
 // All the global constants are put here
 public abstract class Globals 
 {
@@ -9,8 +13,6 @@ public abstract class Globals
 	
 	
 	//IMP:Format tablename_KEY_columname
-
-	
 	// Profile Table!!! 
 	public static final String PROFILE_KEY_ROWID = "_id";
 	public static final String PROFILE_KEY_FIRSTNAME = "fname";
@@ -25,5 +27,28 @@ public abstract class Globals
 	public static String SEND_BROADCAST = "off";
 	public static final String SERVER_IP = "10.31.226.148:8080";
 	
-
+	
+	// for holds chosen courses 
+	
+	public static int NUMBER_OF_COURSES = 0;
+	static ArrayList<ArrayList<String>> courseInfo = new ArrayList<ArrayList<String>>();
+	
+	//public static HashMap<string, string> courseHashMap = new HashMap<string, string="">();
+//	public static boolean IS_COURSE1_ADDED = false;
+//	public static String COURSE1_NAME = "";
+//	public static String COURSE1_NUMBER="";
+//	
+//	public static boolean IS_COURSE2_ADDED = false;
+//	public static String COURSE2_NAME = "";
+//	public static String COURSE2_NUMBER="";
+//	
+//	public static boolean IS_COURSE3_ADDED = false;
+//	public static String COURSE3_NAME = "";
+//	public static String COURSE3_NUMBER="";
+//	
+//	public static boolean IS_COURSE4_ADDED = false;
+//	public static String COURSE4_NAME = "";
+//	public static String COURSE4_NUMBER="";
 }
+
+
