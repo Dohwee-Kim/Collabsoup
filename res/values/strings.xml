@@ -27,6 +27,8 @@
 	<!-- Courses Layout -->
 	<string name="ui_courses_add_button">Add Courses</string>
 	<string name="ui_courses_show_button">Show nearby students</string>
+		<string name="ui_delete_courses_button">Delete selected courses</string>
+	
 	<!-- Courses Layout -->
 	
 	

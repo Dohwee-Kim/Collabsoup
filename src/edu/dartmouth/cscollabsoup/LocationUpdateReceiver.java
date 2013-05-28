@@ -1,4 +1,4 @@
-package edu.dartmouth.cscollabsoup;
+ package edu.dartmouth.cscollabsoup;
 
 import collabsoupServiceController.MessageNotifier;
 import collabsoupServiceController.ServiceEventReceiver;

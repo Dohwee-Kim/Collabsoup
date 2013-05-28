@@ -17,7 +17,7 @@ import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.content.Intent;
 
-
+ 
 public class MainActivity extends Activity {
 	private static final String TAB_INDEX_KEY = "tab_index";  
 	// string for keep tracking last tab 

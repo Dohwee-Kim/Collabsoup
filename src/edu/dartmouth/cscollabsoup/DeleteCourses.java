@@ -42,24 +42,37 @@ public class DeleteCourses extends Activity{
 		tv.setText("Check Courses that you want to delete");
 		ll.addView(tv);
 		
-		
-		ArrayList<CheckBox> checkBoxCollection = new ArrayList<CheckBox>();
 		final CheckBox cb1 = new CheckBox(this);
 		final CheckBox cb2 = new CheckBox(this);
 		final CheckBox cb3 = new CheckBox(this);
 		final CheckBox cb4 = new CheckBox(this);
 		
-		checkBoxCollection.add(cb1);
-		checkBoxCollection.add(cb2);
-		checkBoxCollection.add(cb3);
-		checkBoxCollection.add(cb4);
+		SharedPreferences s_pref =
+				PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		Editor edit=s_pref.edit();
 		
-		for(int i = 0; i < Globals.NUMBER_OF_COURSES; i++){
-			checkBoxCollection.get(i).setText(Globals.courseInfo.get(i).get(0) + " " + Globals.courseInfo.get(i).get(1));
-			//cb.setText(Globals.courseInfo.get(i).get(0) + " " + Globals.courseInfo.get(i).get(1));			
-			ll.addView(checkBoxCollection.get(i));
+		String course1Value = s_pref.getString("course1", "notset");
+		String course2Value = s_pref.getString("course2", "notset");
+		String course3Value = s_pref.getString("course3", "notset");
+		String course4Value = s_pref.getString("course4", "notset");
+		
+		if (!course1Value.equals("notset")){
+			cb1.setText(course1Value);			
+			ll.addView(cb1);
 		}
-		
+		if (!course2Value.equals("notset")){
+			cb2.setText(course2Value);			
+			ll.addView(cb2);
+		}
+		if (!course3Value.equals("notset")){
+			cb3.setText(course3Value);			
+			ll.addView(cb3);
+		}
+		if (!course4Value.equals("notset")){
+			cb4.setText(course4Value);			
+			ll.addView(cb4);
+		}
+			
 		Button b = new Button(this);
 		b.setText("Delete !"); 
 		b.setId(1004);
@@ -69,23 +82,26 @@ public class DeleteCourses extends Activity{
  			@Override
  			public void onClick(View v) {
  				Toast.makeText(getApplicationContext(), "Deleting ....", Toast.LENGTH_SHORT).show();
+ 				
+ 				SharedPreferences s_pref =
+ 						PreferenceManager.getDefaultSharedPreferences(v.getContext());
+ 				Editor edit=s_pref.edit();
+ 				
  				if(cb1.isChecked()) {
- 					Globals.courseInfo.remove(0);
- 					Globals.NUMBER_OF_COURSES-=1;
+ 					edit.remove("course1");
  				}
  				if(cb2.isChecked()){
- 					Globals.courseInfo.remove(1);
- 					Globals.NUMBER_OF_COURSES-=1;
+ 					edit.remove("course2");
  				}
  				if(cb3.isChecked()){
- 					Globals.courseInfo.remove(2);
- 					Globals.NUMBER_OF_COURSES-=1;
+ 					edit.remove("course3");
  				}
  				if(cb4.isChecked()){
- 					Globals.courseInfo.remove(4);
- 					Globals.NUMBER_OF_COURSES-=1;
+ 					edit.remove("course4");
  				}
- 				setResult(1);
+ 				
+ 				edit.commit();
+ 				Globals.JUST_PRESSED_DELETE = 1;
  				finish();
  			}
  	});

@@ -22,24 +22,29 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 
 
 public class LoginActivity extends Activity{
 
-	private final String login = "http://"+Globals.SERVER_IP+"/collabsoup/login.php";
+	
 	private static final String TAG_SUCCESS = "success";
 	String username;
 	String password;
 	private ProgressDialog pDialog;
 	JSONParser jsonParser = new JSONParser();
-
+	String login="";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+			
 		System.out.println();
 		setContentView(R.layout.log_in);
 		// hi i am here 
-		
+		login = "http://"+Globals.SERVER_IP+"/collabsoup/login.php";
+
 		TextView noAccountTextView = (TextView) findViewById (R.id.NoAccountTextView);
 		noAccountTextView.setTextColor(Color.BLUE);
 		noAccountTextView.setOnClickListener(new OnClickListener(){
@@ -51,7 +56,7 @@ public class LoginActivity extends Activity{
 			}
 		});
 	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -97,6 +102,8 @@ class loginUser extends AsyncTask<String, String, String> {
 	 * */
 	protected String doInBackground(String... args) 
 	{
+		
+		
 		
 		username = ((EditText)findViewById(R.id.login_username)).getText().toString();
 		password = ((EditText)findViewById(R.id.login_password)).getText().toString();

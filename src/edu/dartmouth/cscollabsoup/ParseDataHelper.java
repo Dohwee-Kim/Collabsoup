@@ -39,7 +39,6 @@ public class ParseDataHelper extends Activity {
 	
 	JSONParser jsonParser = new JSONParser();
 	private static final String TAG_SUCCESS = "success";
-	Hashtable<String, ArrayList<String>> user_to_courses = new Hashtable<String, ArrayList<String>>();
 	
 	public static final String DATE_FORMAT = "H:mm:ss MMM d yyyy";
 	
@@ -106,7 +105,7 @@ public class ParseDataHelper extends Activity {
 				params.add(new BasicNameValuePair("course3", "CS3"));
 				params.add(new BasicNameValuePair("course4", "CS4"));
 				
-				//System.out.println(nearest_neighbors);
+				//System.out.println(ighbors);
 				Log.d("NEAREST_NEIGHBORS broad", nearest_neighbors);
 
 //				locationInfo.setText(nearest_neighbors);
@@ -183,30 +182,30 @@ public class ParseDataHelper extends Activity {
 //		colocationInfo = (TextView) findViewById(R.id.colocationInfo);
 		locationInfo = (TextView) findViewById(R.id.locationInfo);
 //		conversationInfo = (TextView) findViewById(R.id.conversationInfo);
-		Runnable runnable = new Runnable() {	
+		/*Runnable runnable = new Runnable() {	
 		@Override
             public void run() {  
 		
-			locationInfo.setText(nearest_neighbors);
+			locationInfxt(nearest_neighbors);
 			Log.d("UPDATING IN HANDLER", nearest_neighbors);
-			mHandler.postDelayed(this, 1000);
+			//mHandler.postDelayed(this, 1000);
 		}
-		};
-		mHandler.post(runnable);
+		};*/
+		//mHandler.post(runnable);
 		// registerReceiver(colocationReceiver, new IntentFilter("bio_colocation"));
 		registerReceiver(locationReceiver, new IntentFilter("bio_location"));		
 //		registerReceiver(conversationReceiver, new IntentFilter("bio_conversation"));
 	}
 	
 	
-	class postToDatabaseTask extends AsyncTask<List<NameValuePair>, String, Void> {
-		protected Void doInBackground(List<NameValuePair>... params) 
+	class postToDatabaseTask extends AsyncTask<List<NameValuePair>, String, String> {
+		protected String doInBackground(List<NameValuePair>... params) 
 		{
 			// getting JSON Object
 			// Note that create product url accepts POST method
 			String url_name = "http://"+Globals.SERVER_IP+"/collabsoup/"+Globals.PHP_FILEPATH;
 			JSONObject json = jsonParser.makeHttpRequest(url_name,"POST", params[0]);
-			
+			String nearby = null;
 			// check log cat for response
 			Log.d("Create Response", json.toString());
 
@@ -228,10 +227,12 @@ public class ParseDataHelper extends Activity {
 							to_parse[j] = json.getString(String.valueOf(j));						
 //							Log.d("FLOOOO:jjjjj",String.valueOf(j));
 						}
-						Log.d("NEAREST_NEIGHBORS ASYNC", nearest_neighbors);
-						nearest_neighbors = parseJsonData(to_parse);	
-
-						publishProgress(nearest_neighbors);
+						Log.d("NEAREST_NEIGHBORS ASYNC", "calllled");
+						nearby = new String();
+						nearby = parseJsonData(to_parse);	
+						Log.d("NEAREST_NEIGHBORS ASYNC", "parseJsonData");
+							
+						//			publishProgress(nearest_neighbors);
 					}
 				}
 				else 
@@ -242,16 +243,27 @@ public class ParseDataHelper extends Activity {
 			{
 				e.printStackTrace();
 			}
-
-			return null;
+			Log.d("Nearest neighboiurs doinbackground",nearby);
+			
+			return nearby;
+		}
+		@Override
+		protected void onPostExecute(String nearby)
+		{
+			Log.d("ONPOSTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT","CALLLLLLLLLLLLLLLLLEDDDDDDDDDDDDDDD");
+			Log.d("Nearest neighboiurs on possssssssssssssst",nearby);
+			locationInfo.setText(nearby);
+			
+			
 		}
 		
-		protected void onProgressUpdate(String s)
+		
+	/*	protected void onProgressUpdate(String s)
 		{
 			super.onProgressUpdate(s);
 			Log.d("ONPROGRESSUPDATE", s);
-			locationInfo.setText(s);
-		}
+			//locationInfo.setText(s);
+		}*/
 		}
 	
 	public String parseJsonData(String[] p) {
@@ -259,6 +271,8 @@ public class ParseDataHelper extends Activity {
 		String[][] m = new String[p.length/5][5];
 		int i = 0;
 		int j = 0;
+		Log.d("parseJSONDATA","called1");
+		
 		String s = "";
 		for (int x = 0; x < p.length; x++)
 			if (j == 4) {
@@ -273,6 +287,9 @@ public class ParseDataHelper extends Activity {
 			}
 
 		int rows = m.length;
+		Log.d("parseJSONDATA","called2");
+		Hashtable<String, ArrayList<String>> user_to_courses = new Hashtable<String, ArrayList<String>>();
+
 		for(i = 0; i < rows; i++)
 		{
 //		 |	Betty	Huang	betty	sudikoff-1-2-ap, -56	CS1	|
@@ -294,9 +311,14 @@ public class ParseDataHelper extends Activity {
 					arr.add(m[i][4]); //course
 					user_to_courses.put(usrname, arr);
 					s = Utils.hashToString(user_to_courses);
+					Log.d("parseJSONDATA:SSSSS",s);
+
 				}
 			}
+			Log.d("parseJSONDATA","called3");
+			
 		}
+		Log.d("returning.......................................",s);
 		return s;
 	}
 

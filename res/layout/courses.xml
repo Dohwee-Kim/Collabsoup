@@ -1,79 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/android_backround6">
+    android:layout_height="match_parent">
     
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="164dp"
-        android:orientation="vertical" >
+        android:layout_width ="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
         
-   <TextView
-       android:id="@+id/course_tab_title"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:paddingBottom="10dp"
-       android:paddingLeft="80dp"
-       android:paddingTop="5dp"
-       android:text="@string/ui_course_tab_start_title"
-       android:textColor="#000000"
-       android:textSize="35sp"
-       android:textStyle="bold"
-       android:typeface="serif" />
-
 	<TextView
 	    android:id="@+id/first_course"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:paddingBottom="5dp"
-	    android:text=" "
-	    android:textSize="20sp" />
+
+	    android:text = " " />
 	
 	<TextView
 	    android:id="@+id/second_course"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:paddingBottom="5dp"
-	    android:text=" "
-	    android:textSize="20sp" />
+
+	    android:text= " " />
 	
 	<TextView
 	    android:id="@+id/third_course"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:paddingBottom="5dp"
-	    android:text=" "
-	    android:textSize="20sp" />
 
+	    android:text=" " />
 	<TextView
 	    android:id="@+id/fourth_course"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:paddingBottom="5dp"
-	    android:text=" "
-	    android:textSize="20sp" />
-	
-	<Button
-	    android:id="@+id/coursePickerButton"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_marginBottom="20dp"
-	    android:layout_marginLeft="20dp"
-	    android:layout_marginRight="20dp"
-	    android:layout_marginTop="100dp"
-	    android:text="@string/ui_courses_add_button" />
 
-	<Button
-	    android:id="@+id/courseDeleteButton"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_marginBottom="20dp"
-	    android:layout_marginLeft="20dp"
-	    android:layout_marginRight="20dp"
-	    android:layout_marginTop="100dp"
-	    android:onClick="onDeleteClicked"
-	    android:text="@string/ui_courses_delete_button" />
+	    android:text = " " />
+    
+    
+    <Button
+        android:id="@+id/coursePickerButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="100dp"
+        android:text="@string/ui_courses_add_button" />
     
     <Button
         android:id="@+id/btnSync"
@@ -84,6 +55,16 @@
         android:layout_marginRight="20dp"
         android:onClick="onSyncClicked"
         android:text="@string/ui_courses_show_button" />
+    
+    <Button
+        android:id="@+id/deletebtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:onClick="onDeleteCoursesClicked"
+        android:text="@string/ui_delete_courses_button" />
     
     </LinearLayout>
 

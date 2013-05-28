@@ -26,7 +26,9 @@ public abstract class Globals
 	public static String PHP_FILEPATH = "";
 	public static String SEND_BROADCAST = "off";
 	public static final String SERVER_IP = "10.31.226.47:8080";
-	
+
+
+	public static  int JUST_PRESSED_DELETE = 0;
 	
 	// for holds chosen courses 
 	
