@@ -273,7 +273,15 @@ public class ParseDataHelper extends Activity {
 			//locationInfo.setText(s);
 		}*/
 		}
-	
+	String parseRouter(String location)
+	{
+		if(location.equals("Unavailable"))
+			return location;
+		String [] array;
+		array= location.split("-");
+		String ret = "Building:"+array[0].toString()+" Floor:"+  array[1].toString() + " Room:"+  array[2].toString();
+		return ret;
+	}
 	public String parseJsonData(String[] p) {
 		//convert array to m so each row corresponds to one row in m
 		String[][] m = new String[p.length/5][5];
@@ -319,7 +327,8 @@ public class ParseDataHelper extends Activity {
 					ArrayList<String> arr = new ArrayList<String>();
 					arr.add(m[i][0]); //first name
 					arr.add(m[i][1]); //last name
-					arr.add(m[i][3]); //location
+					String parseLocation = parseRouter(m[i][3]);
+					arr.add(parseLocation); //location
 					arr.add(m[i][4]); //course
 					user_to_courses.put(usrname, arr);
 					s = Utils.hashToString(user_to_courses);
