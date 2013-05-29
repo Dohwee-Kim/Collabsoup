@@ -65,8 +65,6 @@ public class LoginActivity extends Activity{
 		noAccountTextView.setTextColor(Color.BLUE);
 		noAccountTextView.setOnClickListener(new OnClickListener(){
 			public void onClick (View v){
-				Toast.makeText(getApplicationContext(), "intent from Login to create account",
-						Toast.LENGTH_SHORT).show();
 				Intent intent = new Intent (LoginActivity.this, SignUpActivity.class);
 				startActivity(intent);
 			}
@@ -85,10 +83,6 @@ public class LoginActivity extends Activity{
 	
 	//like async task runs in bg
 	public void onSigninClicked(View v){
-//		Toast.makeText(getApplicationContext(),
-//				"intent from Login to main screen..",
-//				Toast.LENGTH_SHORT).show();
-		
 		// Later , need to implement putExtra for additional log in info  
 		username = ((EditText)findViewById(R.id.login_username)).getText().toString();
 		password = ((EditText)findViewById(R.id.login_password)).getText().toString();

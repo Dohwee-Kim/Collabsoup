@@ -96,12 +96,11 @@ public class MainActivity extends Activity {
 
 		public void onTabReselected(Tab tab, FragmentTransaction ft) {
 			// User selected the already selected tab. Usually do nothing.
-			Toast.makeText(mActivity, "Clicked SameTab again", Toast.LENGTH_SHORT).show();
 			}
 	}
 	
 	public void onAddCoursesClicked (View v) {
-	    	Toast.makeText(getApplicationContext(), "CourseFragment to add courses.", Toast.LENGTH_SHORT).show();
+	    	//Toast.makeText(getApplicationContext(), "CourseFragment to add courses.", Toast.LENGTH_SHORT).show();
 	    	Intent intent = new Intent (MainActivity.this, AddCourses.class);
 	    	startActivity (intent);
 	}
