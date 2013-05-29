@@ -36,14 +36,14 @@ public class AddCourses extends Activity{
 	}
 	
 	public void onAddCourseClicked(View v){
-  
+		  
 		String department = (String) mSpinnerDpmt.getSelectedItem();
 		String courseNumber = (String) mSpinnerCourseNumber.getSelectedItem();
-		
+		 
 		SharedPreferences s_pref = 
-				PreferenceManager.getDefaultSharedPreferences(v.getContext());
+		PreferenceManager.getDefaultSharedPreferences(v.getContext());
 		Editor edit=s_pref.edit();
-		
+		 
 		String course1Value = s_pref.getString("course1", "notset");
 		String course2Value = s_pref.getString("course2", "notset");
 		String course3Value = s_pref.getString("course3", "notset");
@@ -51,27 +51,40 @@ public class AddCourses extends Activity{
 
 		if (course1Value.equals("notset"))
 		{
-			Log.d(TAG, "course 1 putString");
-			edit.putString("course1", department + " " + courseNumber);
+		if (checkIfCourseExists(department + " " + courseNumber) == 0) 
+		edit.putString("course1", department + " " + courseNumber);
 		}
 		else if (course2Value.equals("notset"))
 		{
-			Log.d(TAG, "course 2 putString");
-			edit.putString("course2", department + " " + courseNumber);
+		if (checkIfCourseExists(department + " " + courseNumber) == 0)
+		edit.putString("course2", department + " " + courseNumber);
 		}
 		else if (course3Value.equals("notset"))
 		{
-			Log.d(TAG, "course 3 putString");
-			edit.putString("course3", department + " " + courseNumber);
+		if (checkIfCourseExists(department + " " + courseNumber) == 0)
+		edit.putString("course3", department + " " + courseNumber);
 		}
 		else if (course4Value.equals("notset"))
 		{
-			Log.d(TAG, "course 4 putString");
-			edit.putString("course4", department + " " + courseNumber);
+		if (checkIfCourseExists(department + " " + courseNumber) == 0)
+		edit.putString("course4", department + " " + courseNumber);
 		}
 
-        edit.commit();
-        
+		        edit.commit();
+		        
 		finish();
-    }
+		    }
+		 
+		private int checkIfCourseExists(String course)
+		{
+		SharedPreferences s_pref = 
+		PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		 
+		if (s_pref.getString("course1", " ").equals(course)) return 1;
+		if (s_pref.getString("course2", " ").equals(course)) return 1;
+		if (s_pref.getString("course3", " ").equals(course)) return 1;
+		if (s_pref.getString("course4", " ").equals(course)) return 1;
+		 
+		return 0;
+		}
 }
