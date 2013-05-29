@@ -34,6 +34,10 @@ public class ParseDataHelper extends Activity {
 	private TextView colocationInfo;
 	private TextView locationInfo;
 	private TextView conversationInfo;
+	String course1="";
+	String course2="";
+	String course3="";
+	String course4="";
 	Handler mHandler = new Handler();
 	
 	
@@ -100,10 +104,10 @@ public class ParseDataHelper extends Activity {
 				params.add(new BasicNameValuePair("password", Globals.PASSWORD));
 				params.add(new BasicNameValuePair("location", mLocation));
 				params.add(new BasicNameValuePair("send_broadcast", Globals.SEND_BROADCAST));
-				params.add(new BasicNameValuePair("course1", "CS1"));
-				params.add(new BasicNameValuePair("course2", "CS2"));
-				params.add(new BasicNameValuePair("course3", "CS3"));
-				params.add(new BasicNameValuePair("course4", "CS4"));
+				params.add(new BasicNameValuePair("course1", Globals.course1));
+				params.add(new BasicNameValuePair("course2", Globals.course2));
+				params.add(new BasicNameValuePair("course3", Globals.course3));
+				params.add(new BasicNameValuePair("course4", Globals.course4));
 				
 				//System.out.println(ighbors);
 				Log.d("NEAREST_NEIGHBORS broad", nearest_neighbors);
@@ -123,10 +127,10 @@ public class ParseDataHelper extends Activity {
 				params.add(new BasicNameValuePair("password", Globals.PASSWORD));
 				params.add(new BasicNameValuePair("location", mLocation));
 				params.add(new BasicNameValuePair("send_broadcast", Globals.SEND_BROADCAST));				
-				params.add(new BasicNameValuePair("course1", "CS1"));
-				params.add(new BasicNameValuePair("course2", "CS2"));
-				params.add(new BasicNameValuePair("course3", "CS3"));
-				params.add(new BasicNameValuePair("course4", "CS4"));
+				params.add(new BasicNameValuePair("course1", Globals.course1));
+				params.add(new BasicNameValuePair("course2", Globals.course2));
+				params.add(new BasicNameValuePair("course3", Globals.course3));
+				params.add(new BasicNameValuePair("course4", Globals.course4));
 				
 				new postToDatabaseTask().execute(params);
 //				locationInfo.setText(nearest_neighbors);
@@ -177,6 +181,9 @@ public class ParseDataHelper extends Activity {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.parsetesting);
+		Bundle extras = getIntent().getExtras();
+		
+
 		
 //		activityInfo = (TextView) findViewById(R.id.activityInfo);
 //		colocationInfo = (TextView) findViewById(R.id.colocationInfo);
@@ -224,10 +231,11 @@ public class ParseDataHelper extends Activity {
 						for(int j=0; j< json.length()-2;j++)
 						{
 //							if(json.has(String.valueOf(j));	
-							to_parse[j] = json.getString(String.valueOf(j));						
+							to_parse[j] = json.getString(String.valueOf(j));	
+							Log.d("LOG PARSE", to_parse[j]);
 //							Log.d("FLOOOO:jjjjj",String.valueOf(j));
 						}
-						Log.d("NEAREST_NEIGHBORS ASYNC", "calllled");
+//						Log.d("TOPARSE", to_parse);
 						nearby = new String();
 						nearby = parseJsonData(to_parse);	
 						Log.d("NEAREST_NEIGHBORS ASYNC", "parseJsonData");
@@ -275,17 +283,21 @@ public class ParseDataHelper extends Activity {
 		
 		String s = "";
 		for (int x = 0; x < p.length; x++)
+		{
+			Log.d("p in JSONDATA", p[x]);
 			if (j == 4) {
 				m[i][j] = p[x];
+				Log.d("m in JSONDATA", m[i][j]);
 				
 				j = 0;
 				i++;
 			}
 			else {
+				//Log.d("m in JSONDATAin ELSE", m[i][j]);
 				m[i][j] = p[x];
 				j++;
 			}
-
+		}
 		int rows = m.length;
 		Log.d("parseJSONDATA","called2");
 		Hashtable<String, ArrayList<String>> user_to_courses = new Hashtable<String, ArrayList<String>>();

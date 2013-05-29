@@ -72,9 +72,33 @@ public class CourseTabFragment extends Fragment {
     
     
     public void onSyncClicked(View v){
-		// Later , need to implement putExtra for additional log in info  
-		Intent intent = new Intent(mContext, ParseDataHelper.class);
-		startActivity(intent);
+		// Later , need to implement putExtra for additional log in info 
+    	SharedPreferences s_pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+    	String course1=s_pref.getString("course1", " ");
+    	String course2=s_pref.getString("course2", " ");
+    	String course3=s_pref.getString("course3", " ");
+    	String course4 =s_pref.getString("course4", " ");
+		Globals.course1 = course1;
+		Globals.course2 = course2;
+		Globals.course3 = course3;
+		Globals.course4 = course4;
+		
+		Log.d("course1:",course1);
+		Log.d("course2:",course2);
+		Log.d("course3:",course3);
+		Log.d("course4:",course4);
+
+    	if (Globals.SEND_BROADCAST.equals("on")){
+			Intent intent = new Intent(mContext, ParseDataHelper.class);
+			startActivity(intent);
+    	}
+    	else
+				Toast.makeText(mContext, "You have to broadcast your location if you want help, don't be greedy.", Toast.LENGTH_SHORT).show();
+			
+
+		
+		
     }
     
     

@@ -45,16 +45,16 @@ public class SignUpActivity extends Activity
 		
 	public void onSignUpClicked(View v)
 	{
-			Toast.makeText(getApplicationContext(),
-					"intent from Login to main screen..",
-					Toast.LENGTH_SHORT).show();
-			
-			// Later , need to implement putExtra for additional log in info  
-			//Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
-			
-			//startActivity(intent);
+		Toast.makeText(getApplicationContext(),
+				"intent from Login to main screen..",
+				Toast.LENGTH_SHORT).show();
+		
+		//CHANGED BY SAM!!!
+		if (firstName == null || lastName == null || email == null || password == null){
+			Toast.makeText(getApplicationContext(), "Please fill in all the fields.", Toast.LENGTH_SHORT).show();
+		}
+		else
 			new registerUser().execute();
-			
 	}
 	
 

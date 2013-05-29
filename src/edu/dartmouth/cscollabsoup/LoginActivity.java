@@ -69,13 +69,21 @@ public class LoginActivity extends Activity{
 	
 	//like async task runs in bg
 	public void onSigninClicked(View v){
-		Toast.makeText(getApplicationContext(),
-				"intent from Login to main screen..",
-				Toast.LENGTH_SHORT).show();
+//		Toast.makeText(getApplicationContext(),
+//				"intent from Login to main screen..",
+//				Toast.LENGTH_SHORT).show();
 		
 		// Later , need to implement putExtra for additional log in info  
+		username = ((EditText)findViewById(R.id.login_username)).getText().toString();
+		password = ((EditText)findViewById(R.id.login_password)).getText().toString();
 		
-		new loginUser().execute();
+		
+		//ATTEMPTED TO GET THIS TO WORK... DIDN'T WORK
+		if (username.equals(null) || password.equals(null)){
+			Toast.makeText(getApplicationContext(), "Please enter your username.", Toast.LENGTH_SHORT).show();
+		}
+		else
+			new loginUser().execute();
 	}
 
 class loginUser extends AsyncTask<String, String, String> {
