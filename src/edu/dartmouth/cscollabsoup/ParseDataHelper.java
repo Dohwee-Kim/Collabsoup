@@ -18,6 +18,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -184,10 +185,11 @@ public class ParseDataHelper extends Activity {
 		Bundle extras = getIntent().getExtras();
 		
 
-		
+		Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/mountainsofchristmas.otf");
 //		activityInfo = (TextView) findViewById(R.id.activityInfo);
 //		colocationInfo = (TextView) findViewById(R.id.colocationInfo);
 		locationInfo = (TextView) findViewById(R.id.locationInfo);
+		locationInfo.setTypeface(typeface);
 //		conversationInfo = (TextView) findViewById(R.id.conversationInfo);
 		/*Runnable runnable = new Runnable() {	
 		@Override

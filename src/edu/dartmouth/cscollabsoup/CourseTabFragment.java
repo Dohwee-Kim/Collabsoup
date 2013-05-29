@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Button;
 import android.content.Context;
-
+import android.graphics.Typeface;
 
 public class CourseTabFragment extends Fragment {
 	private Context mContext;
@@ -28,6 +28,8 @@ public class CourseTabFragment extends Fragment {
         View view = inflater.inflate(R.layout.courses, container, false);
         
         mButton = (Button)view.findViewById(R.id.btnSync);
+        Typeface btnface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/buttonfont.otf");
+        mButton.setTypeface(btnface);
         
         mButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -39,7 +41,7 @@ public class CourseTabFragment extends Fragment {
         
         
         mAddCoursesButton = (Button) view.findViewById(R.id.coursePickerButton);
-        
+        mAddCoursesButton.setTypeface(btnface);
         Log.d(TAG, "setting on click Listener");
         mAddCoursesButton.setOnClickListener(new View.OnClickListener() {
  			
@@ -53,7 +55,7 @@ public class CourseTabFragment extends Fragment {
         });
         
         mDeleteCoursesButton = (Button) view.findViewById(R.id.deletebtn);
-        
+        mDeleteCoursesButton.setTypeface(btnface);
         Log.d(TAG, "setting on click Listener");
         mDeleteCoursesButton.setOnClickListener(new View.OnClickListener() {
  			
@@ -74,7 +76,7 @@ public class CourseTabFragment extends Fragment {
     public void onSyncClicked(View v){
 		// Later , need to implement putExtra for additional log in info 
     	SharedPreferences s_pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-
+    	Typeface coursefont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/capture_it.otf");
     	String course1=s_pref.getString("course1", " ");
     	String course2=s_pref.getString("course2", " ");
     	String course3=s_pref.getString("course3", " ");
@@ -105,7 +107,7 @@ public class CourseTabFragment extends Fragment {
     public void refreshViews()
     {
     	SharedPreferences s_pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-
+    	Typeface coursefont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/capture_it.otf");
     	TextView firstCourse = (TextView) getView().findViewById(R.id.first_course);
 		TextView secondCourse = (TextView) getView().findViewById(R.id.second_course);
 		TextView thirdCourse = (TextView) getView().findViewById(R.id.third_course);
@@ -119,24 +121,28 @@ public class CourseTabFragment extends Fragment {
 		if (!s_pref.getString("course1", " ").equals(" "))
 		{
     		Log.d(TAG, "course 1 setText");
+    		firstCourse.setTypeface(coursefont);
     		firstCourse.setText(s_pref.getString("course1", " "));
 		}
 
     	if (!s_pref.getString("course2", " ").equals(" "))
 		{
     		Log.d(TAG, "course 2 setText");
+    		secondCourse.setTypeface(coursefont);
     		secondCourse.setText(s_pref.getString("course2", " "));
 		}
 
     	if (!s_pref.getString("course3", " ").equals(" "))
 		{
     		Log.d(TAG, "course 3 setText");
+    		thirdCourse.setTypeface(coursefont);
     		thirdCourse.setText(s_pref.getString("course3", " "));
 		}
     	
     	if (!s_pref.getString("course4", " ").equals(" "))
 		{
     		Log.d(TAG, "course 4 setText");
+    		fourthCourse.setTypeface(coursefont);
     		fourthCourse.setText(s_pref.getString("course4", " "));
 		}
     	

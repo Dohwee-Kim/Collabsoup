@@ -9,7 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import edu.dartmouth.cscollabsoup.ParseDataHelper.postToDatabaseTask;
-
+import android.graphics.Typeface;
 import android.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -28,11 +28,14 @@ public class ProfileTabFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
     	View view = inflater.inflate(R.layout.profile_tab_fragment, container, false);
+    	Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/3dumb.otf");
+		Typeface btnface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/buttonfont.otf");
     	
-    	
+		TextView profileTitle = (TextView) view.findViewById(R.id.profile_tab_title);
+		
     	TextView userName = (TextView) view.findViewById(R.id.user_profile_tab_name);
     	userName.setText(getString(R.string.ui_profile_name_title) + " " + Globals.USERNAME);
-    	
+    	profileTitle.setTypeface(typeface);
     	TextView firstName = (TextView) view.findViewById(R.id.user_profile_tab_first_name);
     	firstName.setText(getString(R.string.ui_profile_first_name) + " " + Globals.FIRSTNAME);
     	

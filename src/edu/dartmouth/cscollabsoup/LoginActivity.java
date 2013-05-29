@@ -8,11 +8,11 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +22,7 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Button;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -45,7 +46,22 @@ public class LoginActivity extends Activity{
 		// hi i am here 
 		login = "http://"+Globals.SERVER_IP+"/collabsoup/login.php";
 
+		//TextView noAccountTextView = (TextView) findViewById (R.id.NoAccountTextView);
 		TextView noAccountTextView = (TextView) findViewById (R.id.NoAccountTextView);
+		Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/3dumb.otf");
+		Typeface btnface = Typeface.createFromAsset(getAssets(), "fonts/buttonfont.otf");
+		TextView loginEmail = (TextView)findViewById(R.id.editText3);
+		TextView passWord = (TextView)findViewById(R.id.editText4);
+		//TextView signInbtn = (TextView)findViewById(R.id.NoAccountTextView);
+		Button signinbtn = (Button)findViewById(R.id.button1);
+		
+		signinbtn.setTypeface(btnface);
+		
+		
+		loginEmail.setTypeface(typeface);
+		passWord.setTypeface(typeface);
+		noAccountTextView.setTypeface(btnface);
+		
 		noAccountTextView.setTextColor(Color.BLUE);
 		noAccountTextView.setOnClickListener(new OnClickListener(){
 			public void onClick (View v){
